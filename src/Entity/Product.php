@@ -40,7 +40,11 @@ class Product {
      */
     private $collection;
 
-    private $img;
+    /**
+     * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Gallery", mappedBy="product",cascade={"persist"})
+     * @ORM\JoinColumn(name="gallery", referencedColumnName="id",nullable=true)
+    */
+    private $gallery;
 
     /**
      * @ORM\ManyToMany(targetEntity="Size", inversedBy="products")
@@ -104,15 +108,6 @@ class Product {
         return $this;
     }
 
-    public function getImg() {
-        return $this->img;
-    }
-
-    public function setImg($img) {
-        $this->img = $img;
-        return $this;
-    }
-
     public function getSizes() {
         return $this->sizes;
     }
@@ -151,6 +146,15 @@ class Product {
 
     public function setDescription($description) {
         $this->description = $description;
+        return $this;
+    }
+
+    public function getGallery() {
+        return $this->gallery;
+    }
+
+    public function setGallery($gallery) {
+        $this->gallery = $gallery;
         return $this;
     }
 }

@@ -31,6 +31,8 @@ class ProductAdmin extends AbstractAdmin
             ]);
         $formMapper->add('description', TextareaType::class);
         $formMapper->add('price', TextType::class);
+        $formMapper->add('gallery', ModelListType::class);
+
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -46,6 +48,7 @@ class ProductAdmin extends AbstractAdmin
         $listMapper->add('sizes');
         $listMapper->add('description');
         $listMapper->add('price');
+        $listMapper->add('gallery');
     }
 }
 
