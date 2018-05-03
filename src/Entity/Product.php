@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use App\Entity\CategoryProduct;
 use App\Entity\Collection;
 use App\Entity\Size;
+use App\Entity\Shape;
+use App\Entity\Material;
 
 /**
  * @ORM\Entity
@@ -14,8 +16,6 @@ use App\Entity\Size;
  */
 class Product {
 
-
-    // afin que ça entre en BDD
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -61,6 +61,12 @@ class Product {
     private $materials;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Shape", inversedBy="products")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $shape;
+
+    /**
      * @ORM\Column(type="float")
      */
     private $price;
@@ -102,6 +108,16 @@ class Product {
     public function setCategory(CategoryProduct $category) {
         $this->category = $category;
         $category->addProduct($this);
+        return $this;
+    }
+
+    public function getShape() {
+        return $this->shape;
+    }
+
+    public function setShape(Shape $shape) {
+        $this->shape = $shape;
+        $shape->addProduct($this);
         return $this;
     }
 

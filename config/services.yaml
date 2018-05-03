@@ -61,3 +61,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Material }
         public: true
+
+    admin.shape:
+        class: App\Admin\ShapeAdmin
+        arguments: [~, App\Entity\Shape, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Shape }
+        public: true

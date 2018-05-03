@@ -14,6 +14,7 @@ use App\Entity\Size;
 use App\Entity\Material;
 use App\Entity\Collection;
 use App\Entity\CategoryProduct;
+use App\Entity\Shape;
 
 class ProductAdmin extends AbstractAdmin
 {
@@ -34,6 +35,9 @@ class ProductAdmin extends AbstractAdmin
                 'class' => Material::class,
                 'multiple' => true
             ]);
+        $formMapper->add('shape',EntityType::class, [
+                'class' => Shape::class
+            ]);
         $formMapper->add('description', TextareaType::class);
         $formMapper->add('price', TextType::class);
         $formMapper->add('gallery', ModelListType::class);
@@ -52,6 +56,7 @@ class ProductAdmin extends AbstractAdmin
         $listMapper->add('collection');
         $listMapper->add('sizes');
         $listMapper->add('materials');
+        $listMapper->add('shape');
         $listMapper->add('description');
         $listMapper->add('price');
         $listMapper->add('gallery');
