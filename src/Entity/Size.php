@@ -45,8 +45,8 @@ class Size {
 
     public function __toString() {
         $string = '';
-        if($this->name)
-            $string = $this->name;
+        if($this->name && $this->category)
+            $string = $this->category . " : " . $this->name;
 
         return $string;
     }

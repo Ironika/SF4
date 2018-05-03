@@ -9,16 +9,26 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
-use Sonata\CoreBundle\Form\Type\CollectionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Size;
+use App\Entity\Collection;
+use App\Entity\CategoryProduct;
 
 class ProductAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name', TextType::class);
-        $formMapper->add('category', ModelListType::class);
-        $formMapper->add('collection', ModelListType::class);
-        $formMapper->add('sizes', CollectionType::class);
+        $formMapper->add('category',EntityType::class, [
+                'class' => CategoryProduct::class
+            ]);
+        $formMapper->add('collection', EntityType::class, [
+                'class' => Collection::class
+            ]);
+        $formMapper->add('sizes', EntityType::class, [
+                'class' => Size::class,
+                'multiple' => true
+            ]);
         $formMapper->add('description', TextareaType::class);
         $formMapper->add('price', TextType::class);
     }
