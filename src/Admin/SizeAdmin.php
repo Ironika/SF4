@@ -9,12 +9,12 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 
-class CategoryProductAdmin extends AbstractAdmin
+class SizeAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name', TextType::class);
-        $formMapper->add('media', ModelListType::class, array());
+        $formMapper->add('category', ModelListType::class);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -24,8 +24,8 @@ class CategoryProductAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->add('media', 'string', array('template' => '@SonataMedia/MediaAdmin/list_image.html.twig'));
         $listMapper->addIdentifier('name');
+        $listMapper->add('category');
     }
 }
 

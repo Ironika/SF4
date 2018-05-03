@@ -24,4 +24,12 @@ class User extends BaseUser
         parent::__construct();
         // your own logic
     }
+
+    public function __toString() {
+        $string = '';
+        if($this->id)
+            $string = $this->id;
+
+        return $string;
+    }
 }

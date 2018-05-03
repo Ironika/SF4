@@ -8,9 +8,9 @@ use App\Entity\Product;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="category_product")
+ * @ORM\Table(name="collection")
  */
-class CategoryProduct {
+class Collection {
 
     /**
      * @ORM\Id
@@ -29,20 +29,21 @@ class CategoryProduct {
      */
     private $media;
 
-    // connexion one to many entre category et product
     /**
      * @ORM\OneToMany(targetEntity="Product", mappedBy="category", orphanRemoval=true)
      */
     private $products;
 
     /**
-     * @ORM\OneToMany(targetEntity="Size", mappedBy="category", orphanRemoval=true)
+     * @var \DateTime
+     * @ORM\Column(name="created_at", type="datetime")
      */
-    private $sizes;
+    private $createdAt;
 
-    public function __construct() { // dès qu'on créé une catégorie, un tableau se créé
-        $this->products = new ArrayCollection(); // tableau special de doctrine, collection, pas vraiment tableau
-        $this->sizes = new ArrayCollection();
+
+    public function __construct() { 
+        $this->products = new ArrayCollection();
+        $this->createdAt = new \Datetime('now');
     }
 
     public function __toString() {
@@ -84,9 +85,9 @@ class CategoryProduct {
         return $this;
     }
 
-    public function addProduct(Product $product) { // on type $product, comme ça renvoie erreur si ce n'est pas un product (class)
+    public function addProduct(Product $product) {
         if(!$this->products->contains($product)) {
-            $this->products[] = $product; // quand il y a des crochets puis un =, cela veut dire qu on ajoute
+            $this->products[] = $product;
         }
         return $this;
     }
@@ -98,17 +99,19 @@ class CategoryProduct {
         return $this;
     }
 
-    public function addSize(Size $size) {
-        if(!$this->sizes->contains($size)) {
-            $this->sizes[] = $size;
-        }
-        return $this;
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 
-    public function removeSize(Size $size) {
-        if($this->sizes->contains($size)) {
-            $this->sizes->removeElement($size);
-        }
-        return $this;
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
     }
 }

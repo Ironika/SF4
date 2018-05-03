@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Entity\CategoryProduct;
+use App\Entity\Collection;
+use App\Entity\Size;
 
 /**
  * @ORM\Entity
@@ -21,22 +24,34 @@ class Product {
     private $id;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $name;
+
+    /**
      * @ORM\ManyToOne(targetEntity="CategoryProduct", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Collection", inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $collection;
+
     private $img;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToMany(targetEntity="Size", inversedBy="products")
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinTable(name="product_sizes")
      */
-    private $size;
+    private $sizes;
 
     /**
      * @ORM\Column(type="float")
      */
-
     private $price;
 
     /**
@@ -44,8 +59,29 @@ class Product {
      */
     private $description;
 
+    public function __construct() {
+        $this->sizes = new ArrayCollection();
+    }
+
+    public function __toString() {
+        $string = '';
+        if($this->name)
+            $string = $this->name;
+
+        return $string;
+    }
+
     public function getId() {
         return $this->id;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function setName($name) {
+        $this->name = $name;
+        return $this;
     }
 
     public function getCategory() {
@@ -58,6 +94,16 @@ class Product {
         return $this;
     }
 
+    public function getCollection() {
+        return $this->collection;
+    }
+
+    public function setCollection(Collection $collection) {
+        $this->collection = $collection;
+        $collection->addProduct($this);
+        return $this;
+    }
+
     public function getImg() {
         return $this->img;
     }
@@ -67,12 +113,26 @@ class Product {
         return $this;
     }
 
-    public function getSize() {
-        return $this->size;
+    public function getSizes() {
+        return $this->sizes;
     }
 
-    public function setSize($size) {
-        $this->size = $size;
+    public function setSizes(ArrayCollection $sizes) {
+        $this->sizes = $sizes;
+        return $this;
+    }
+
+    public function addSize(Size $size) {
+        if(!$this->sizes->contains($size)) {
+            $this->sizes[] = $size;
+        }
+        return $this;
+    }
+
+    public function removeSize(Size $size) {
+        if($this->sizes->contains($size)) {
+            $this->sizes->removeElement($size);
+        }
         return $this;
     }
 

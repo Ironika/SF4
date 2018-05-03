@@ -33,3 +33,24 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Category Product }
         public: true
+
+    admin.collection:
+        class: App\Admin\CollectionAdmin
+        arguments: [~, App\Entity\Collection, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Collection }
+        public: true
+
+    admin.size:
+        class: App\Admin\SizeAdmin
+        arguments: [~, App\Entity\Size, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Size }
+        public: true
+
+    admin.product:
+        class: App\Admin\ProductAdmin
+        arguments: [~, App\Entity\Product, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Product }
+        public: true

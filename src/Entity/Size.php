@@ -5,12 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Product;
+use App\Entity\CategoryProduct;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="category_product")
+ * @ORM\Table(name="size")
  */
-class CategoryProduct {
+class Size {
 
     /**
      * @ORM\Id
@@ -25,24 +26,21 @@ class CategoryProduct {
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media")
-     */
-    private $media;
-
-    // connexion one to many entre category et product
-    /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="category", orphanRemoval=true)
+     * 
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="sizes")
      */
     private $products;
 
     /**
-     * @ORM\OneToMany(targetEntity="Size", mappedBy="category", orphanRemoval=true)
+     * @ORM\ManyToOne(targetEntity="CategoryProduct", inversedBy="sizes")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $sizes;
+    private $category;
 
-    public function __construct() { // dès qu'on créé une catégorie, un tableau se créé
-        $this->products = new ArrayCollection(); // tableau special de doctrine, collection, pas vraiment tableau
-        $this->sizes = new ArrayCollection();
+
+    public function __construct() { 
+        $this->products = new ArrayCollection();
+        $this->createdAt = new \Datetime('now');
     }
 
     public function __toString() {
@@ -84,9 +82,9 @@ class CategoryProduct {
         return $this;
     }
 
-    public function addProduct(Product $product) { // on type $product, comme ça renvoie erreur si ce n'est pas un product (class)
+    public function addProduct(Product $product) {
         if(!$this->products->contains($product)) {
-            $this->products[] = $product; // quand il y a des crochets puis un =, cela veut dire qu on ajoute
+            $this->products[] = $product;
         }
         return $this;
     }
@@ -98,17 +96,29 @@ class CategoryProduct {
         return $this;
     }
 
-    public function addSize(Size $size) {
-        if(!$this->sizes->contains($size)) {
-            $this->sizes[] = $size;
-        }
+    public function getCategory() {
+        return $this->category;
+    }
+
+    public function setCategory(CategoryProduct $category) {
+        $this->category = $category;
+        $category->addSize($this);
         return $this;
     }
 
-    public function removeSize(Size $size) {
-        if($this->sizes->contains($size)) {
-            $this->sizes->removeElement($size);
-        }
-        return $this;
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
     }
 }

@@ -9,7 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 
-class CategoryProductAdmin extends AbstractAdmin
+class CollectionAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -20,12 +20,14 @@ class CategoryProductAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('name');
+        $datagridMapper->add('createdAt');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->add('media', 'string', array('template' => '@SonataMedia/MediaAdmin/list_image.html.twig'));
         $listMapper->addIdentifier('name');
+        $listMapper->add('createdAt');
     }
 }
 
