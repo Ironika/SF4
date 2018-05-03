@@ -5,13 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Product;
-use App\Entity\CategoryProduct;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="size")
+ * @ORM\Table(name="material")
  */
-class Size {
+class Material {
 
     /**
      * @ORM\Id
@@ -26,16 +25,9 @@ class Size {
     private $name;
 
     /**
-     * 
-     * @ORM\ManyToMany(targetEntity="Product", mappedBy="sizes")
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="materials")
      */
     private $products;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="CategoryProduct", inversedBy="sizes")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
 
 
     public function __construct() { 
@@ -44,8 +36,8 @@ class Size {
 
     public function __toString() {
         $string = '';
-        if($this->name && $this->category)
-            $string = $this->category . " : " . $this->name;
+        if($this->name)
+            $string = $this->name;
 
         return $string;
     }
@@ -60,6 +52,15 @@ class Size {
 
     public function setName($name) {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getMedia() {
+        return $this->media;
+    }
+
+    public function setMedia($media) {
+        $this->media = $media;
         return $this;
     }
 
@@ -83,16 +84,6 @@ class Size {
         if($this->products->contains($product)) {
             $this->products->removeElement($product);
         }
-        return $this;
-    }
-
-    public function getCategory() {
-        return $this->category;
-    }
-
-    public function setCategory(CategoryProduct $category) {
-        $this->category = $category;
-        $category->addSize($this);
         return $this;
     }
 }

@@ -54,3 +54,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Product }
         public: true
+
+    admin.material:
+        class: App\Admin\MaterialAdmin
+        arguments: [~, App\Entity\Material, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Material }
+        public: true

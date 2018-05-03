@@ -54,6 +54,13 @@ class Product {
     private $sizes;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Material", inversedBy="products")
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinTable(name="product_materials")
+     */
+    private $materials;
+
+    /**
      * @ORM\Column(type="float")
      */
     private $price;
@@ -127,6 +134,29 @@ class Product {
     public function removeSize(Size $size) {
         if($this->sizes->contains($size)) {
             $this->sizes->removeElement($size);
+        }
+        return $this;
+    }
+
+    public function getMaterials() {
+        return $this->materials;
+    }
+
+    public function setMaterials(ArrayCollection $materials) {
+        $this->materials = $materials;
+        return $this;
+    }
+
+    public function addMaterial(Material $material) {
+        if(!$this->materials->contains($material)) {
+            $this->materials[] = $material;
+        }
+        return $this;
+    }
+
+    public function removeMaterial(Material $material) {
+        if($this->materials->contains($material)) {
+            $this->materials->removeElement($material);
         }
         return $this;
     }
