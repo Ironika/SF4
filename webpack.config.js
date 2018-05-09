@@ -20,7 +20,7 @@ Encore
     .addEntry('js/jquery.magnific-popup', './assets/vendor/MagnificPopup/jquery.magnific-popup.min.js')
     .addEntry('js/sweetalert', './assets/vendor/sweetalert/sweetalert.min.js')
     .addEntry('js/daterangepicker', './assets/vendor/daterangepicker/daterangepicker.js')
-
+    .addEntry('js/map-custom', './assets/js/map-custom.js')
     .addEntry('js/slick-custom', './assets/js/slick-custom.js')
     .addEntry('js/main', './assets/js/main.js')
     .addEntry('js/app', './assets/js/app.js')
