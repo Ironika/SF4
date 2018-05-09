@@ -24,7 +24,9 @@ Encore
     .addEntry('js/slick-custom', './assets/js/slick-custom.js')
     .addEntry('js/main', './assets/js/main.js')
     .addEntry('js/app', './assets/js/app.js')
+
     .addStyleEntry('css/app', './assets/css/app.scss')
+    .addStyleEntry('css/paginate', './assets/css/paginate.scss')
 
     .createSharedEntry('vendor', [
         'jquery', 

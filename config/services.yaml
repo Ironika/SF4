@@ -68,3 +68,17 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Shape }
         public: true
+
+    admin.blog:
+        class: App\Admin\BlogAdmin
+        arguments: [~, App\Entity\Blog, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Blog }
+        public: true
+
+    admin.tag:
+        class: App\Admin\TagAdmin
+        arguments: [~, App\Entity\Tag, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Tag }
+        public: true

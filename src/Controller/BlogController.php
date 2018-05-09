@@ -5,6 +5,10 @@ namespace App\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Tag;
+use App\Entity\Blog;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 class BlogController extends Controller
 {
@@ -13,10 +17,35 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('blog.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        $tags = $this->getDoctrine()->getManager()->getRepository(Tag::class)->findAll();
+
+        $page = 1;
+        if($request->get('page'))
+            $page = $request->get('page');
+
+        if($request->get('tag')) 
+            $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()->select('b')->from(Blog::class, 'b')->join('b.tags', 't')->where('t.id = :tag')->orderBy('b.createdAt', 'DESC')->setParameter('tag', $request->get('tag'));
+        else
+            $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()->select('b')->from(Blog::class, 'b')->orderBy('b.createdAt', 'DESC');
+
+        $adapter = new DoctrineORMAdapter($qb);
+        $pagerfanta = new Pagerfanta($adapter);
+     
+        try {
+            $blogs = $pagerfanta
+                ->setMaxPerPage(2)
+                ->setCurrentPage($page)
+                ->getCurrentPageResults()
+            ;
+        } catch (\Pagerfanta\Exception\NotValidCurrentPageException $e) {
+            throw $this->createNotFoundException("Page not found");
+        }
+
+        return $this->render('blog.html.twig', array(
+            'tags' => $tags,
+            'blogs' => $blogs,
+            'pager' => $pagerfanta,
+        ));
     }
 
     /**
@@ -24,9 +53,12 @@ class BlogController extends Controller
      */
     public function showAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('blog-detail.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        $blog = $this->getDoctrine()->getManager()->getRepository(Blog::class)->find($request->get('id'));
+        $tags = $this->getDoctrine()->getManager()->getRepository(Tag::class)->findAll();
+
+        return $this->render('blog-detail.html.twig', array(
+            'blog' => $blog,
+            'tags' => $tags
+        ));
     }
 }
