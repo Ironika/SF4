@@ -38,7 +38,7 @@
 
 						<span>
 							{% for tag in blog.tags %}
-								{{ tag }} 
+								{{ loop.index < blog.tags|length ? tag ~ ',' : tag }}
 							{% endfor %}  
 							{# <span class="cl12 m-l-4 m-r-6">|</span> #}
 						</span>

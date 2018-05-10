@@ -38,7 +38,12 @@ class ProductAdmin extends AbstractAdmin
         $formMapper->add('shape',EntityType::class, [
                 'class' => Shape::class
             ]);
-        $formMapper->add('description', TextareaType::class);
+        $formMapper->add('description', TextareaType::class, array(
+            'attr' => array(
+                'class' => 'tinymce',
+                'data-theme' => 'bbcode'
+               )
+        ));
         $formMapper->add('price', TextType::class);
         $formMapper->add('gallery', ModelListType::class);
 

@@ -31,49 +31,49 @@ services:
         class: App\Admin\CategoryProductAdmin
         arguments: [~, App\Entity\CategoryProduct, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Category Product }
+            - { name: sonata.admin, manager_type: orm, label: Category Product, group: "Product" }
         public: true
 
     admin.collection:
         class: App\Admin\CollectionAdmin
         arguments: [~, App\Entity\Collection, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Collection }
+            - { name: sonata.admin, manager_type: orm, label: Collection, group: "Product" }
         public: true
 
     admin.size:
         class: App\Admin\SizeAdmin
         arguments: [~, App\Entity\Size, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Size }
+            - { name: sonata.admin, manager_type: orm, label: Size, group: "Product" }
         public: true
 
     admin.product:
         class: App\Admin\ProductAdmin
         arguments: [~, App\Entity\Product, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Product }
+            - { name: sonata.admin, manager_type: orm, label: Product, group: "Product" }
         public: true
 
     admin.material:
         class: App\Admin\MaterialAdmin
         arguments: [~, App\Entity\Material, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Material }
+            - { name: sonata.admin, manager_type: orm, label: Material, group: "Product" }
         public: true
 
     admin.shape:
         class: App\Admin\ShapeAdmin
         arguments: [~, App\Entity\Shape, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Shape }
+            - { name: sonata.admin, manager_type: orm, label: Shape, group: "Product" }
         public: true
 
     admin.blog:
         class: App\Admin\BlogAdmin
         arguments: [~, App\Entity\Blog, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Blog }
+            - { name: sonata.admin, manager_type: orm, label: Blog, group: "Blog" }
         # calls:
         #     - [ setTemplate, [edit, '@AdminBundle/BlogAdmin/edit.html.twig']]
         public: true
@@ -82,5 +82,5 @@ services:
         class: App\Admin\TagAdmin
         arguments: [~, App\Entity\Tag, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Tag }
+            - { name: sonata.admin, manager_type: orm, label: Tag, group: "Blog" }
         public: true
