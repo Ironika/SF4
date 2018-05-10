@@ -2,3 +2,11 @@ framework:
     # ...
     templating:
         engines: ['twig', 'php']
+
+stfalcon_tinymce:
+    # include_jquery: true
+    tinymce_jquery: true
+    selector: ".tinymce"
+    theme:
+        simple:
+            theme: "modern"

@@ -74,6 +74,8 @@ services:
         arguments: [~, App\Entity\Blog, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Blog }
+        # calls:
+        #     - [ setTemplate, [edit, '@AdminBundle/BlogAdmin/edit.html.twig']]
         public: true
 
     admin.tag:

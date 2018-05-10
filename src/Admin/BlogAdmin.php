@@ -17,11 +17,16 @@ class BlogAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('title', TextType::class);
-        $formMapper->add('content', TextareaType::class);
         $formMapper->add('tags', EntityType::class, [
             'class' => Tag::class,
             'multiple' => true
         ]);
+        $formMapper->add('content', TextareaType::class, array(
+            'attr' => array(
+                'class' => 'tinymce',
+                'data-theme' => 'bbcode'
+               )
+        ));
         $formMapper->add('media', ModelListType::class, array());
     }
 

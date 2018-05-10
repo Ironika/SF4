@@ -26,7 +26,7 @@ Encore
     .addEntry('js/app', './assets/js/app.js')
 
     .addStyleEntry('css/app', './assets/css/app.scss')
-    .addStyleEntry('css/paginate', './assets/css/paginate.scss')
+    .addStyleEntry('css/blog', './assets/css/blog.scss')
 
     .createSharedEntry('vendor', [
         'jquery', 
