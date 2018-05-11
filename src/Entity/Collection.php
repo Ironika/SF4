@@ -30,7 +30,7 @@ class Collection {
     private $media;
 
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="category", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="collection", orphanRemoval=true)
      */
     private $products;
 

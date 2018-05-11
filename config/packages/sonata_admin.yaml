@@ -1,6 +1,6 @@
 sonata_admin:
     title: 'The Ineluctable'
-    title_logo: images/thumb-03.jpg
+    title_logo: images/logo.png
     dashboard:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }

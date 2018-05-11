@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <title>{% block title %}Symfony 4{% endblock %}</title>
          <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
-         <link rel="stylesheet" href="{{ asset('build/css/blog.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
     <body class="animsition">
@@ -24,7 +23,7 @@
                                 Help & FAQs
                             </a>
 
-                            <a href="#" class="flex-c-m trans-04 p-lr-25">
+                            <a href="{{ path('fos_user_profile_show') }}" class="flex-c-m trans-04 p-lr-25">
                                 My Account
                             </a>
 
@@ -40,7 +39,7 @@
                         
                         <!-- Logo desktop -->       
                         <a href="{{ path('homepage') }}" class="logo">
-                            <img src="{{ asset('images/icons/logo-01.png') }}" alt="IMG-LOGO">
+                            <img src="{{ asset('images/logo.png') }}" alt="Ineluctable">
                         </a>
 
                         <!-- Menu desktop -->

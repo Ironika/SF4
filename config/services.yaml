@@ -74,8 +74,6 @@ services:
         arguments: [~, App\Entity\Blog, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Blog, group: "Blog" }
-        # calls:
-        #     - [ setTemplate, [edit, '@AdminBundle/BlogAdmin/edit.html.twig']]
         public: true
 
     admin.tag:
@@ -83,4 +81,11 @@ services:
         arguments: [~, App\Entity\Tag, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Tag, group: "Blog" }
+        public: true
+
+    admin.slide:
+        class: App\Admin\SlideAdmin
+        arguments: [~, App\Entity\Slide, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Slide, group: "Slider" }
         public: true

@@ -5,6 +5,8 @@ namespace App\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Product;
+use App\Entity\CategoryProduct;
 
 class ProductController extends Controller
 {
@@ -13,10 +15,14 @@ class ProductController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findAll();
+        $products = $this->getDoctrine()->getManager()->getRepository(Product::class)->findAll();
+
         // replace this example code with whatever you need
-        return $this->render('products.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render('products.html.twig', array(
+            'categories' => $categories,
+            'products' => $products
+        ));
     }
 
     /**
@@ -24,9 +30,11 @@ class ProductController extends Controller
      */
     public function showAction(Request $request)
     {
+        $product = $this->getDoctrine()->getManager()->getRepository(Product::class)->find($request->get('id'));
+
         // replace this example code with whatever you need
-        return $this->render('product-detail.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render('product-detail.html.twig', array(
+            'product' => $product,
+        ));
     }
 }

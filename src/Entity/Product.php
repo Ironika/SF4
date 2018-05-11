@@ -41,8 +41,7 @@ class Product {
     private $collection;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Gallery", mappedBy="product",cascade={"persist"})
-     * @ORM\JoinColumn(name="gallery", referencedColumnName="id",nullable=true)
+     * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Gallery")
     */
     private $gallery;
 
@@ -76,8 +75,15 @@ class Product {
      */
     private $description;
 
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
     public function __construct() {
         $this->sizes = new ArrayCollection();
+        $this->materials = new ArrayCollection();
+        $this->createdAt = new \Datetime('now');
     }
 
     public function __toString() {
@@ -202,5 +208,15 @@ class Product {
     public function setGallery($gallery) {
         $this->gallery = $gallery;
         return $this;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
     }
 }

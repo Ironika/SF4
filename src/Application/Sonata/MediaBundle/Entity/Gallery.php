@@ -22,12 +22,6 @@ class Gallery extends BaseGallery
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Product", inversedBy="gallery")
-     * @ORM\JoinColumn(nullable=true)
-    */
-    protected $product;
-
-    /**
      * Get id.
      *
      * @return int $id
@@ -36,14 +30,4 @@ class Gallery extends BaseGallery
     {
         return $this->id;
     }
-
-    public function getProduct() {
-        return $this->product;
-    }
-
-    public function setProduct(Product $product) {
-        $this->product = $product;
-        return $this;
-    }
-
 }
