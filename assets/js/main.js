@@ -230,7 +230,7 @@ var Isotope = require('isotope-layout');
     [ +/- num product cart ]*/
     $('.btn-num-cart-product-down').on('click', function(){
         var numProduct = Number($(this).next().val());
-        if(numProduct > 0) {
+        if(numProduct > 1) {
             $(this).next().val(numProduct - 1);
             var price = parseInt($(this).parent().parent().parent().find('.product-price').text());
             var totalPrice = parseInt($(this).parent().parent().parent().find('.total-product-price').text())

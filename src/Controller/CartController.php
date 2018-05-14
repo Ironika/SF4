@@ -65,8 +65,8 @@ class CartController extends Controller
     public function removeAction(Request $request)
     {
         $cm = $this->get('cart_manager');
-        $cm->removeItem($id);
+        $cm->removeItem($request->get('id'));
 
-        return $this->redirect($this->generateUrl('cart_view'));
+        return $this->redirect($this->generateUrl('cart'));
     }
 }
