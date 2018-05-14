@@ -35,7 +35,6 @@ class Blog {
     private $content;
 
     /**
-     * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;

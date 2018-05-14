@@ -14,3 +14,12 @@
 
 @import url(util.css);
 @import url(main.css);
+
+//
+.icon-cart {
+	color: black;
+	cursor: pointer;
+	:hover {
+		color: #007bff;
+	}
+}

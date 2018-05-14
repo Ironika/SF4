@@ -227,6 +227,27 @@ var Isotope = require('isotope-layout');
     });
 
     /*==================================================================
+    [ +/- num product cart ]*/
+    $('.btn-num-cart-product-down').on('click', function(){
+        var numProduct = Number($(this).next().val());
+        if(numProduct > 0) {
+            $(this).next().val(numProduct - 1);
+            var price = parseInt($(this).parent().parent().parent().find('.product-price').text());
+            var totalPrice = parseInt($(this).parent().parent().parent().find('.total-product-price').text())
+            $(this).parent().parent().parent().find('.total-product-price').text(totalPrice - price);
+        }
+
+    });
+
+    $('.btn-num-cart-product-up').on('click', function(){
+        var numProduct = Number($(this).prev().val());
+        $(this).prev().val(numProduct + 1);
+        var price = parseInt($(this).parent().parent().parent().find('.product-price').text());
+        var totalPrice = parseInt($(this).parent().parent().parent().find('.total-product-price').text()) + price
+        $(this).parent().parent().parent().find('.total-product-price').text(totalPrice);
+    });
+
+    /*==================================================================
     [ Rating ]*/
     $('.wrap-rating').each(function(){
         var item = $(this).find('.item-rating');
@@ -272,7 +293,72 @@ var Isotope = require('isotope-layout');
     [ Show modal1 ]*/
     $('.js-show-modal1').on('click',function(e){
         e.preventDefault();
-        $('.js-modal1').addClass('show-modal1');
+        var product_id = $(this).attr('data-product');
+        var url = site_url + 'modal/product/' + product_id;
+
+        $.ajax({
+            type: 'post',
+            url: url,
+            success: function (data) {
+                $('.modal-product').html(data);
+                $('.js-modal1').addClass('show-modal1');
+                $(".js-select2").each(function(){
+                    $(this).select2({
+                        minimumResultsForSearch: 20,
+                        dropdownParent: $(this).next('.dropDownSelect2')
+                    });
+                })
+                $('.gallery-lb').each(function() { // the containers for all your galleries
+                    $(this).magnificPopup({
+                        delegate: 'a', // the selector for gallery item
+                        type: 'image',
+                        gallery: {
+                            enabled:true
+                        },
+                        mainClass: 'mfp-fade'
+                    });
+                });
+                $('.wrap-slick3').each(function(){
+                    $(this).find('.slick3').slick({
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        fade: true,
+                        infinite: true,
+                        autoplay: false,
+                        autoplaySpeed: 6000,
+
+                        arrows: true,
+                        appendArrows: $(this).find('.wrap-slick3-arrows'),
+                        prevArrow:'<button class="arrow-slick3 prev-slick3"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',
+                        nextArrow:'<button class="arrow-slick3 next-slick3"><i class="fa fa-angle-right" aria-hidden="true"></i></button>',
+
+                        dots: true,
+                        appendDots: $(this).find('.wrap-slick3-dots'),
+                        dotsClass:'slick3-dots',
+                        customPaging: function(slick, index) {
+                            var portrait = $(slick.$slides[index]).data('thumb');
+                            return '<img src=" ' + portrait + ' "/><div class="slick3-dot-overlay"></div>';
+                        },  
+                    });
+                });
+                $('.btn-num-product-down').on('click', function(){
+                    var numProduct = Number($(this).next().val());
+                    if(numProduct > 0) $(this).next().val(numProduct - 1);
+                });
+
+                $('.btn-num-product-up').on('click', function(){
+                    var numProduct = Number($(this).prev().val());
+                    $(this).prev().val(numProduct + 1);
+                });
+
+                $('.js-addcart-detail').each(function(){
+                    var nameProduct = $('.js-name-detail').text();
+                    $(this).on('click', function(){
+                        swal(nameProduct, "is added to cart !", "success");
+                    });
+                });
+            }
+        });
     });
 
     $('.js-hide-modal1').on('click',function(){
@@ -329,10 +415,19 @@ var Isotope = require('isotope-layout');
     });
 
 
-    $('.js-addcart-detail').each(function(){
-        var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+    $('.js-addcart-detail').each(function() {
         $(this).on('click', function(){
-            swal(nameProduct, "is added to cart !", "success");
+            var product_id = $(this).attr('data-product');
+            var url = site_url + 'cart/add/' + product_id;
+            var nameProduct = $('.js-name-detail').text();
+            $.ajax({
+                type: 'post',
+                url: url,
+                success: function (data) {
+                    $('.js-show-cart').attr('data-notify', parseInt($('.js-show-cart').attr('data-notify')) + 1);
+                    swal(nameProduct, "is added to cart !", "success");
+                }
+            })
         });
     });
 

@@ -5,8 +5,10 @@ namespace App\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+
 use App\Entity\Tag;
 use App\Entity\Blog;
+use App\Entity\Product;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
@@ -18,6 +20,9 @@ class BlogController extends Controller
     public function indexAction(Request $request)
     {
         $tags = $this->getDoctrine()->getManager()->getRepository(Tag::class)->findAll();
+
+        $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()->select('p')->from(Product::class, 'p')->orderBy('p.createdAt', 'DESC')->setMaxResults(3);
+        $products = $qb->getQuery()->getResult();
 
         $page = 1;
         if($request->get('page'))
@@ -45,6 +50,7 @@ class BlogController extends Controller
             'tags' => $tags,
             'blogs' => $blogs,
             'pager' => $pagerfanta,
+            'products' => $products
         ));
     }
 
@@ -55,10 +61,13 @@ class BlogController extends Controller
     {
         $blog = $this->getDoctrine()->getManager()->getRepository(Blog::class)->find($request->get('id'));
         $tags = $this->getDoctrine()->getManager()->getRepository(Tag::class)->findAll();
+        $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()->select('p')->from(Product::class, 'p')->orderBy('p.createdAt', 'DESC')->setMaxResults(3);
+        $products = $qb->getQuery()->getResult();
 
         return $this->render('blog-detail.html.twig', array(
             'blog' => $blog,
-            'tags' => $tags
+            'tags' => $tags,
+            'products' => $products
         ));
     }
 }

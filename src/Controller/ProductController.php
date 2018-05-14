@@ -37,4 +37,17 @@ class ProductController extends Controller
             'product' => $product,
         ));
     }
+
+    /**
+     * @Route("/modal/product/{id}", name="modal_product_detail")
+     */
+    public function modalAction(Request $request)
+    {
+        $product = $this->getDoctrine()->getManager()->getRepository(Product::class)->find($request->get('id'));
+
+        // replace this example code with whatever you need
+        return $this->render('modal-product.html.twig', array(
+            'product' => $product,
+        ));
+    }
 }
