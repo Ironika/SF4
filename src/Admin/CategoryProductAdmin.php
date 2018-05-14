@@ -24,10 +24,8 @@ class CategoryProductAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('id');
-        $listMapper->add('name');
         $listMapper->add('media', 'string', array('template' => '@SonataMedia/MediaAdmin/list_image.html.twig'));
-
+        $listMapper->addIdentifier('name');
     }
 }
 

@@ -35,8 +35,22 @@ class CategoryProduct {
      */
     private $products;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Size", mappedBy="category", orphanRemoval=true)
+     */
+    private $sizes;
+
     public function __construct() { // dès qu'on créé une catégorie, un tableau se créé
         $this->products = new ArrayCollection(); // tableau special de doctrine, collection, pas vraiment tableau
+        $this->sizes = new ArrayCollection();
+    }
+
+    public function __toString() {
+        $string = '';
+        if($this->name)
+            $string = $this->name;
+
+        return $string;
     }
 
     public function getId() {
@@ -80,6 +94,20 @@ class CategoryProduct {
     public function removeProduct(Product $product) {
         if($this->products->contains($product)) {
             $this->products->removeElement($product);
+        }
+        return $this;
+    }
+
+    public function addSize(Size $size) {
+        if(!$this->sizes->contains($size)) {
+            $this->sizes[] = $size;
+        }
+        return $this;
+    }
+
+    public function removeSize(Size $size) {
+        if($this->sizes->contains($size)) {
+            $this->sizes->removeElement($size);
         }
         return $this;
     }

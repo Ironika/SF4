@@ -1,8 +1,12 @@
 sonata_admin:
-    title: 'Sonata Admin'
+    title: 'The Ineluctable'
+    title_logo: images/logo.png
     dashboard:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
+    templates:
+        edit: 'Admin/edit.html.twig'
+        # create: 'Admin/create.html.twig'
 
 sonata_block:
     blocks:
