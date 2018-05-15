@@ -1,5 +1,5 @@
 sonata_admin:
-    title: 'The Ineluctable'
+    # title: 'The Ineluctable'
     title_logo: images/logo.png
     dashboard:
         blocks:
@@ -7,6 +7,8 @@ sonata_admin:
     templates:
         edit: 'Admin/edit.html.twig'
         # create: 'Admin/create.html.twig'
+    assets:
+        extra_stylesheets: ['build/css/admin.css']
 
 sonata_block:
     blocks:

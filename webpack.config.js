@@ -28,6 +28,7 @@ Encore
     .addStyleEntry('css/app', './assets/css/app.scss')
     .addStyleEntry('css/blog', './assets/css/blog.scss')
     .addStyleEntry('css/home', './assets/css/home.scss')
+    .addStyleEntry('css/admin', './assets/css/admin.scss')
 
     .createSharedEntry('vendor', [
         'jquery', 
