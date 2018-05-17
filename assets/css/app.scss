@@ -16,22 +16,22 @@
 @import url(main.css);
 
 //
-.icon-cart {
+.icon-cart, .icon-account {
 	color: black;
 	cursor: pointer;
-	:hover {
+	&:hover {
 		color: #007bff;
 	}
 }
 .update-cart-content {
 	justify-content: center;
 }
-.column-5 {
+.column-4 {
 	position: relative;
 	.remove-item {
 	    position: absolute;
-	    top: 5px;
-	    right: 10px;
+	    top: 71px;
+    	right: -25px;
 	    color: red;
 	    font-weight: bold;
 	    font-size: 14px;

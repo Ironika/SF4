@@ -6,7 +6,7 @@
 	{% for blog in blogs %}
         <div class="p-b-63">
 			<a href="{{ path('blog_detail', {id : blog.id })}}" class="hov-img0 how-pos5-parent">
-				<img src="{% path blog.media, 'big' %}" alt="IMG-BLOG">
+				<img src="{% path blog.media, 'big' %}" alt="{{ blog.title }}">
 
 				<div class="flex-col-c-m size-123 bg9 how-pos5">
 					<span class="ltext-107 cl2 txt-center">
