@@ -171,7 +171,8 @@ var Isotope = require('isotope-layout');
             });
         });
         var current_category = getUrlParameter('current_category');
-        iso.arrange({filter: '.' + current_category})
+        if(current_category)
+            iso.arrange({filter: '.' + current_category})
     });
 
     var isotopeButton = $('.filter-tope-group button');
