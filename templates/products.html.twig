@@ -2,19 +2,38 @@
 
 {% block body %}
 
+<!-- Title page -->
+<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
+	<h2 class="ltext-105 cl0 txt-center">
+		Shop
+	</h2>
+</section>
+
 <!-- Product -->
 <div class="bg0 m-t-23 p-b-140" style="margin-top: 80px;">
 	<div class="container">
 		<div class="flex-w flex-sb-m p-b-52">
 			<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-					All Products
-				</button>
+				{% if current_category %}
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter="*">
+						All Products
+					</button>
+				{% else %}
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+						All Products
+					</button>
+				{% endif %}
 
 				{% for category in categories %}
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".{{ category.name }}">
-						{{ category.name }}
-					</button>
+					{% if current_category == category  %}
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter=".{{ category.name }}">
+							{{ category.name }}
+						</button>
+					{% else %}
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".{{ category.name }}">
+							{{ category.name }}
+						</button>
+					{% endif %}
 				{% endfor %} 
 			</div>
 

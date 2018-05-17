@@ -18,10 +18,16 @@ class ProductController extends Controller
         $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findAll();
         $products = $this->getDoctrine()->getManager()->getRepository(Product::class)->findAll();
 
+        $current_category = null;
+        if($request->query->get('current_category')) {
+            $current_category = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findOneBy(array('name' => $request->query->get('current_category')));
+        }
+
         // replace this example code with whatever you need
         return $this->render('products.html.twig', array(
             'categories' => $categories,
-            'products' => $products
+            'products' => $products,
+            'current_category' => $current_category
         ));
     }
 
@@ -38,16 +44,16 @@ class ProductController extends Controller
         ));
     }
 
-    /**
-     * @Route("/modal/product/{id}", name="modal_product_detail")
-     */
-    public function modalAction(Request $request)
-    {
-        $product = $this->getDoctrine()->getManager()->getRepository(Product::class)->find($request->get('id'));
+    // /**
+    //  * @Route("/modal/product/{id}", name="modal_product_detail")
+    //  */
+    // public function modalAction(Request $request)
+    // {
+    //     $product = $this->getDoctrine()->getManager()->getRepository(Product::class)->find($request->get('id'));
 
-        // replace this example code with whatever you need
-        return $this->render('modal-product.html.twig', array(
-            'product' => $product,
-        ));
-    }
+    //     // replace this example code with whatever you need
+    //     return $this->render('modal-product.html.twig', array(
+    //         'product' => $product,
+    //     ));
+    // }
 }

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\CategoryProduct;
 use App\Entity\Product;
+use App\Entity\Blog;
 use App\Entity\Slide;
 
 class HomeController extends Controller
@@ -21,12 +22,16 @@ class HomeController extends Controller
 
         $slides = $this->getDoctrine()->getManager()->getRepository(Slide::class)->findAll();
 
-        $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()->select('p')->from(Product::class, 'p')->orderBy('p.createdAt', 'DESC')->setMaxResults(10);
+        $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()->select('p')->from(Product::class, 'p')->orderBy('p.createdAt', 'DESC')->setMaxResults(8);
         $products = $qb->getQuery()->getResult();
+
+        $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()->select('b')->from(Blog::class, 'b')->orderBy('b.createdAt', 'DESC')->setMaxResults(3);
+        $blogs = $qb->getQuery()->getResult();
 
         return $this->render('home.html.twig', array(
             'categories' => $categories,
             'products' => $products,
+            'blogs' => $blogs,
             'slides' => $slides
         ));
     }
