@@ -25,10 +25,12 @@ Encore
     .addEntry('js/main', './assets/js/main.js')
     .addEntry('js/app', './assets/js/app.js')
 
+    .addStyleEntry('css/variables', './assets/css/variables.scss')
     .addStyleEntry('css/app', './assets/css/app.scss')
     .addStyleEntry('css/blog', './assets/css/blog.scss')
     .addStyleEntry('css/home', './assets/css/home.scss')
     .addStyleEntry('css/admin', './assets/css/admin.scss')
+    .addStyleEntry('css/account', './assets/css/account.scss')
 
     .createSharedEntry('vendor', [
         'jquery', 

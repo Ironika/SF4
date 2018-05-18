@@ -6,22 +6,27 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-        <div class="login-container">
-            <h1>Login to Your Account</h1><br>
-            <form>
-                <label for="username">{{ 'security.login.username'|trans }}</label>
-                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-                <label for="password">{{ 'security.login.password'|trans }}</label>
-                <input type="password" id="password" name="_password" required="required" />
+    <div class="login-container size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+        <h1 class="mtext-105 cl2 txt-center p-b-30">Login to Your Account</h1><br>
+        <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+             <div class="bor8 m-b-20 how-pos4-parent">
+               {# <label for="username">{{ 'security.login.username'|trans }}</label> #}
+                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Username" />
+            </div>
+            <div class="bor8 m-b-20 how-pos4-parent">
+                {# <label for="password">{{ 'security.login.password'|trans }}</label> #}
+                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" id="password" name="_password" required="required" placeholder="Password"/>
+            </div>
+            <div class="m-b-20 how-pos4-parent">
                 <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
                 <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-                <input type="submit" class="login login-submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-            </form>
-            <div class="login-help">
-                <a href="{{ path('fos_user_registration_register') }}">Register</a> - <a href="{{ path('fos_user_resetting_request') }}">Forgot Password</a>
             </div>
+            <input type="submit" class="login login-submit flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+        </form>
+        <div class="login-help m-b-20">
+            <a href="{{ path('fos_user_registration_register') }}">Register</a> - <a href="{{ path('fos_user_resetting_request') }}">Forgot Password</a>
         </div>
-    </form>
+    </div>
+
 {% endblock fos_user_content %}
