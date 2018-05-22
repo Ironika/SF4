@@ -1,8 +1,31 @@
 @import "variables";
 
+.content {
+	padding: 25px;
+}
+
 .login-container {
 	margin: auto;
 	@media screen and (max-width: $md) {
 	  width: 100% !important;
+	}
+	.remember_me {
+		display: inline-block;
+	}
+	.remember_me_label {
+		display: inline-block;
+		margin-right: 10px;
+	}
+	.login-help {
+		text-align: center;
+		margin-top: 20px;
+    	a {
+			font-family: Poppins-Medium;
+    		font-size: 14px;
+    		color: #333;
+    		&:hover {
+	    		color: #6c7ae0;
+	    	}
+    	}
 	}
 }

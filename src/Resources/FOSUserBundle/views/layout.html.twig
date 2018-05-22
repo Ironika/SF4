@@ -14,7 +14,7 @@
 </section>
 
 <div class="container">
-	<div>
+	<div class="content">
 	    <div>
 	        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 	            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |

@@ -1,0 +1,35 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "layout.html.twig" %}
+
+{% block fos_user_content %}
+
+    <div class="login-container size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+        <h1 class="mtext-105 cl2 txt-center p-b-30">Create an Account</h1><br>
+        <form action="{{ path('fos_user_registration_register') }}" method="POST" class="form-signin">
+            <div class="form-group" id="fos_user_registration_form">
+                <div class="bor8 m-b-20 how-pos4-parent">
+                    {{ form_widget(form.email, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder': 'form.email'|trans } }) }}
+                    {{ form_errors(form.email) }}
+                </div>
+                <div class="bor8 m-b-20 how-pos4-parent">
+                    {{ form_widget(form.username, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder': 'form.username'|trans } }) }}
+                    {{ form_errors(form.username) }}
+                </div>
+                <div class="bor8 m-b-20 how-pos4-parent">
+                    {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder': 'form.password'|trans } }) }}
+                    {{ form_errors(form.plainPassword.first) }}
+                </div>
+                <div class="bor8 m-b-20 how-pos4-parent">
+                    {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder': 'form.password_confirmation'|trans } }) }}
+                    {{ form_errors(form.plainPassword.second) }}
+                </div>
+
+                {{ form_rest(form) }}
+            </div>
+            <div>
+                <input class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04" type="submit" value="{{ 'registration.submit'|trans }}">
+            </div>
+        </form>
+    </div>
+
+{% endblock fos_user_content %}
