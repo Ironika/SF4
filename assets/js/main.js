@@ -159,6 +159,10 @@ var Isotope = require('isotope-layout');
 
     // init Isotope
     $(window).on('load', function () {
+        initIsotop()
+    });
+
+    function initIsotop() {
         var $grid = $topeContainer.each(function () {
             iso = new Isotope(this, {
                 itemSelector: '.isotope-item',
@@ -173,7 +177,7 @@ var Isotope = require('isotope-layout');
         var current_category = getUrlParameter('current_category');
         if(current_category)
             iso.arrange({filter: '.' + current_category})
-    });
+    }
 
     var isotopeButton = $('.filter-tope-group button');
 
@@ -185,6 +189,17 @@ var Isotope = require('isotope-layout');
 
             $(this).addClass('how-active1');
         });
+    });
+
+    //Load more item products
+    $(".isotope-item").slice(0, 1).show(); // select the first ten
+    $("#load").click(function(e){ // click event for load more
+        e.preventDefault();
+        $(".isotope-item:hidden").slice(0, 1).show(); // select next 10 hidden divs and show them
+        initIsotop()
+        if($(".isotope-item:hidden").length == 0){ // check if any hidden divs still exist
+            $("#load").hide(); // hide btn if there are none left
+        }
     });
 
     /*==================================================================
