@@ -135,4 +135,14 @@ class OrderProduct {
     {
         $this->quantity = $quantity;
     }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
 }

@@ -153,6 +153,7 @@ var Isotope = require('isotope-layout');
         $filter.on('click', 'button', function () {
             var filterValue = $(this).attr('data-filter');
             iso.arrange({filter: filterValue})
+            // $(".isotope-item").slice(0, 8).show();
         });
         
     });
@@ -192,15 +193,15 @@ var Isotope = require('isotope-layout');
     });
 
     //Load more item products
-    $(".isotope-item").slice(0, 1).show(); // select the first ten
-    $("#load").click(function(e){ // click event for load more
-        e.preventDefault();
-        $(".isotope-item:hidden").slice(0, 1).show(); // select next 10 hidden divs and show them
-        initIsotop()
-        if($(".isotope-item:hidden").length == 0){ // check if any hidden divs still exist
-            $("#load").hide(); // hide btn if there are none left
-        }
-    });
+    // $(".isotope-item").slice(0, 8).show(); // select the first ten
+    // $("#load").click(function(e){ // click event for load more
+    //     e.preventDefault();
+    //     $(".isotope-item:hidden").slice(0, 8).show(); // select next 10 hidden divs and show them
+    //     initIsotop()
+    //     if($(".isotope-item:hidden").length == 0){ // check if any hidden divs still exist
+    //         $("#load").hide(); // hide btn if there are none left
+    //     }
+    // });
 
     /*==================================================================
     [ Filter / Search product ]*/
@@ -451,11 +452,21 @@ var Isotope = require('isotope-layout');
     $('.js-addcart-detail').each(function() {
         $(this).on('click', function(){
             var product_id = $(this).attr('data-product');
-            var url = site_url + 'cart/add/' + product_id;
+            var size_id = $("#size").val();
+            var shape_id = $("#shape").val();
+            var material_id = $("#material").val();
+            var datas = {
+                product: product_id,
+                size : size_id,
+                shape : shape_id,
+                material : material_id,
+            };
+            var url = site_url + 'cart/add';
             var nameProduct = $('.js-name-detail').text();
             $.ajax({
                 type: 'post',
                 url: url,
+                data: datas,
                 success: function (data) {
                     $('.js-show-cart').attr('data-notify', parseInt($('.js-show-cart').attr('data-notify')) + 1);
                     swal(nameProduct, "is added to cart !", "success");

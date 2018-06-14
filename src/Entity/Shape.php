@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Product;
+use App\Entity\CategoryProduct;
 
 /**
  * @ORM\Entity
@@ -25,7 +26,8 @@ class Shape {
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="shape")
+     * 
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="shapes")
      */
     private $products;
 

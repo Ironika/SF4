@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 use App\Entity\OrderProduct;
 use App\Entity\Product;
+use App\Entity\Size;
+use App\Entity\Shape;
+use App\Entity\Material;
 
 class CartController extends Controller
 {
@@ -39,14 +42,33 @@ class CartController extends Controller
     }
 
     /**
-     * @Route("/cart/add/{id}", name="cart_add")
+     * @Route("/cart/add", name="cart_add")
      */
     public function addAction(Request $request)
     {
-        $product = $this->getDoctrine()->getManager()->getRepository(Product::class)->find($request->get('id'));
-
         $orderProduct = new OrderProduct();
+
+        $product = $this->getDoctrine()->getManager()->getRepository(Product::class)->find($request->get('product'));
         $orderProduct->setProduct($product);
+
+        if($request->get('size')) {
+            $size = $this->getDoctrine()->getManager()->getRepository(Size::class)->find($request->get('size'));
+            if($size)
+                $orderProduct->setSize($size);
+        }
+        if($request->get('shape')) {
+            $shape = $this->getDoctrine()->getManager()->getRepository(Shape::class)->find($request->get('shape'));
+            if($shape)
+                $orderProduct->setShape($shape);
+        }
+        if($request->get('material')) {
+            $material = $this->getDoctrine()->getManager()->getRepository(Material::class)->find($request->get('material'));
+            if($material)
+                $orderProduct->setMaterial($material);
+        }
+
+        $user = $this->getUser(); 
+        $orderProduct->setUser($user);  
 
         $this->getDoctrine()->getManager()->persist($orderProduct);
         $this->getDoctrine()->getManager()->flush();

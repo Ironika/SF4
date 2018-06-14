@@ -60,10 +60,11 @@ class Product {
     private $materials;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Shape", inversedBy="products")
+     * @ORM\ManyToMany(targetEntity="Shape", inversedBy="products")
      * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinTable(name="product_shapes")
      */
-    private $shape;
+    private $shapes;
 
     /**
      * @ORM\Column(type="float")
@@ -71,9 +72,14 @@ class Product {
     private $price;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $shortDescription;
 
     /**
      * @ORM\Column(name="created_at", type="datetime")
@@ -82,6 +88,7 @@ class Product {
 
     public function __construct() {
         $this->sizes = new ArrayCollection();
+        $this->shapes = new ArrayCollection();
         $this->materials = new ArrayCollection();
         $this->createdAt = new \Datetime('now');
     }
@@ -117,13 +124,26 @@ class Product {
         return $this;
     }
 
-    public function getShape() {
-        return $this->shape;
+    public function getShapes() {
+        return $this->shapes;
     }
 
-    public function setShape(Shape $shape) {
-        $this->shape = $shape;
-        $shape->addProduct($this);
+    public function setShapes(Shape $shapes) {
+        $this->shapes = $shapes;
+        return $this;
+    }
+
+    public function addShape(Shape $shape) {
+        if(!$this->shapes->contains($shape)) {
+            $this->shapes[] = $shape;
+        }
+        return $this;
+    }
+
+    public function removeShape(Shape $shape) {
+        if($this->shapes->contains($shape)) {
+            $this->shapes->removeElement($shape);
+        }
         return $this;
     }
 
@@ -198,6 +218,15 @@ class Product {
 
     public function setDescription($description) {
         $this->description = $description;
+        return $this;
+    }
+
+    public function getShortDescription() {
+        return $this->shortDescription;
+    }
+
+    public function setShortDescription($shortDescription) {
+        $this->shortDescription = $shortDescription;
         return $this;
     }
 

@@ -14,7 +14,6 @@ class SizeAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name', TextType::class);
-        $formMapper->add('category', ModelListType::class);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -25,7 +24,6 @@ class SizeAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('name');
-        $listMapper->add('category');
     }
 }
 

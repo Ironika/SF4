@@ -31,21 +31,14 @@ class Size {
      */
     private $products;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="CategoryProduct", inversedBy="sizes")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
-
-
     public function __construct() { 
         $this->products = new ArrayCollection();
     }
 
     public function __toString() {
         $string = '';
-        if($this->name && $this->category)
-            $string = $this->category . " : " . $this->name;
+        if($this->name)
+            $string = $this->name;
 
         return $string;
     }
@@ -83,16 +76,6 @@ class Size {
         if($this->products->contains($product)) {
             $this->products->removeElement($product);
         }
-        return $this;
-    }
-
-    public function getCategory() {
-        return $this->category;
-    }
-
-    public function setCategory(CategoryProduct $category) {
-        $this->category = $category;
-        $category->addSize($this);
         return $this;
     }
 }

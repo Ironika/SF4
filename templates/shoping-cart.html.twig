@@ -50,7 +50,21 @@
 											{% endfor %}
 										</div>
 									</td>
-									<td class="column-2">{{ orderProduct.product.name }}</td>
+									<td class="column-2">
+										{{ orderProduct.product.name }} 
+										{% if orderProduct.size %}
+											<br>
+											{{ orderProduct.size.name }}
+										{% endif %}
+										{% if orderProduct.shape %}
+											<br>
+											{{ orderProduct.shape.name }}
+										{% endif %}
+										{% if orderProduct.material %}
+											<br>
+											{{ orderProduct.material.name }}
+										{% endif %}
+									</td>
 									<td class="column-3">$ <span class="product-price">{{ orderProduct.product.price }}</span></td>
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
