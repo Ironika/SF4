@@ -1,0 +1,156 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<!-- Title page -->
+<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
+	<h2 class="ltext-105 cl0 txt-center">
+		Search
+	</h2>
+</section>
+
+
+<section class="sec-blog bg0 p-t-60">
+	<div class="container">
+		<div class="p-b-66">
+			<h3 class="ltext-105 cl5 txt-center respon1">
+				Results for "<span class="search-word">{{ search }}</span>"
+			</h3>
+		</div>
+		<div class="row">
+		{% if blogs is empty and products is empty %}
+			<p class="search-results">No Results ...</p>
+		{% endif %}
+		{% if blogs or products %}
+			<p class="search-results">We have founds {{ blogs|length + products|length }} results.</p>
+		{% endif %}
+		</div>
+	</div>
+</section>
+
+{% if products %}
+	<section class="sec-product bg0 p-t-100 p-b-50">
+		<div class="container">
+			<div class="p-b-32">
+				<h3 class="ltext-105 cl5 txt-center respon1">
+					Products
+				</h3>
+			</div>
+			<!-- Slide2 -->
+			<div class="wrap-slick2">
+				<div class="slick2">
+					{% for product in products %}
+						<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+							<!-- Block2 -->
+							<div class="block2">
+								<div class="block2-pic hov-img0">
+									{% for img in product.gallery.galleryHasMedias %}
+										{% if loop.index == 1 %}
+										    <img src="{% path img.media, 'big' %}" alt="{{ product.name }}">
+										{% endif %}
+									{% endfor %}
+
+									<a href="{{ path('product_detail', {id: product.id})}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+										View
+									</a>
+								</div>
+
+								<div class="block2-txt flex-w flex-t p-t-14">
+									<div class="block2-txt-child1 flex-col-l ">
+										<a href="{{ path('product_detail', {id: product.id})}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+											{{ product.name }}
+										</a>
+
+										{# <span class="stext-105 cl3">
+											${{ product.price }}
+										</span> #}
+									</div>
+
+									<div class="block2-txt-child2 flex-r p-t-3">
+										<span class="stext-105 cl3">
+											${{ product.price }}
+										</span>
+										{# <a class="btn-addwish-b2 dis-block pos-relative icon-cart js-addcart-detail" data-product="{{ product.id }}">
+											<i class="zmdi zmdi-shopping-cart"></i>
+										</a> #}
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="flex-c-m flex-w w-full p-t-45">
+				<a href="{{ path('products') }}" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+					See more
+				</a>
+			</div>
+		</div>
+	</section>
+{% endif %}
+
+{% if blogs %}
+	<section class="sec-blog bg0 p-t-60 p-b-90">
+		<div class="container">
+			<div class="p-b-66">
+				<h3 class="ltext-105 cl5 txt-center respon1">
+					Blogs
+				</h3>
+			</div>
+
+			<div class="row">
+				{% for blog in blogs %}
+					<div class="col-sm-6 col-md-4 p-b-40">
+						<div class="blog-item">
+							<div class="hov-img0">
+								<a href="{{ path('blog_detail', {id: blog.id})}}">
+									<img src="{% path blog.media, 'big' %}" alt="{{ blog.title }}">
+								</a>
+							</div>
+
+							<div class="p-t-15">
+								<div class="stext-107 flex-w p-b-14">
+									<span class="m-r-3">
+										<span class="cl4">
+											By
+										</span>
+
+										<span class="cl5">
+											Admin
+										</span>
+									</span>
+
+									<span>
+										<span class="cl4">
+											on
+										</span>
+
+										<span class="cl5">
+											{{ blog.createdAt|date("M") }} {{ blog.createdAt|date("d") }}, {{ blog.createdAt|date("Y") }}
+										</span>
+									</span>
+								</div>
+
+								<h4 class="p-b-12">
+									<a href="{{ path('blog_detail', {id: blog.id})}}" class="mtext-101 cl2 hov-cl1 trans-04">
+										{{ blog.title }}
+									</a>
+								</h4>
+
+								<p class="stext-108 cl6">
+									{{ (blog.content|length > 50 ? blog.content|slice(0, 150) ~ ' ...' : blog.content)|raw  }}
+								</p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="flex-c-m flex-w w-full p-t-45">
+				<a href="{{ path('blog') }}" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+					See more
+				</a>
+			</div>
+		</div>
+	</section>
+{% endif %}
+
+{% endblock %}
