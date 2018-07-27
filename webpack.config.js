@@ -32,8 +32,8 @@ Encore
     .addEntry('js/main', './assets/js/main.js')
     .addEntry('js/app', './assets/js/app.js')
 
-    .addStyleEntry('css/skins/lightgray/skin', './node_modules/tinymce/skins/lightgray/skin.min.css')
-    .addStyleEntry('css/skins/lightgray/content', './node_modules/tinymce/skins/lightgray/content.min.css')
+    .addStyleEntry('js/skins/lightgray/skin.min', './node_modules/tinymce/skins/lightgray/skin.min.css')
+    .addStyleEntry('js/skins/lightgray/content.min', './node_modules/tinymce/skins/lightgray/content.min.css')
     .addStyleEntry('css/variables', './assets/css/variables.scss')
     .addStyleEntry('css/app', './assets/css/app.scss')
     .addStyleEntry('css/blog', './assets/css/blog.scss')
