@@ -17,6 +17,7 @@
         "build": "encore production"
     },
     "dependencies": {
-        "isotope-layout": "^3.0.6"
+        "isotope-layout": "^3.0.6",
+        "tinymce": "^4.8.1"
     }
 }
