@@ -26,15 +26,18 @@ class ProductAdmin extends AbstractAdmin
             ]);
         $formMapper->add('sizes', EntityType::class, [
                 'class' => Size::class,
-                'multiple' => true
+                'multiple' => true,
+                'required' => false
             ]);
         $formMapper->add('materials', EntityType::class, [
                 'class' => Material::class,
-                'multiple' => true
+                'multiple' => true,
+                'required' => false
             ]);
         $formMapper->add('shapes',EntityType::class, [
                 'class' => Shape::class,
-                'multiple' => true
+                'multiple' => true,
+                'required' => false
             ]);
         $formMapper->add('category',EntityType::class, [
                 'class' => CategoryProduct::class
@@ -42,16 +45,10 @@ class ProductAdmin extends AbstractAdmin
         $formMapper->add('price', TextType::class);
         $formMapper->add('gallery', ModelListType::class);
         $formMapper->add('shortDescription', TextareaType::class, array(
-            'attr' => array(
-                'class' => 'tinymce',
-                'data-theme' => 'bbcode'
-               )
+            'required' => false
         ));
         $formMapper->add('description', TextareaType::class, array(
-            'attr' => array(
-                'class' => 'tinymce',
-                'data-theme' => 'bbcode'
-               )
+            'required' => false
         ));
 
     }

@@ -22,10 +22,7 @@ class BlogAdmin extends AbstractAdmin
             'multiple' => true
         ]);
         $formMapper->add('content', TextareaType::class, array(
-            'attr' => array(
-                //'class' => 'tinymce',
-                // 'data-theme' => 'bbcode'
-               )
+            'required' => false
         ));
         $formMapper->add('media', ModelListType::class, array());
     }

@@ -6,7 +6,6 @@ $(document).ready(function() {
 	  theme: 'modern',
 	  plugins: 'image lists textcolor link',
 	  toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | link | image',
-	  // image_advtab: true,
 	  file_browser_callback: MyFileBrowser
 	});
 	function MyFileBrowser(field_name, url, type, win) {
@@ -27,4 +26,5 @@ $(document).ready(function() {
 	  });
 	  return false;
 	}
+	// $("textarea").attr('required', 'required');
 });
