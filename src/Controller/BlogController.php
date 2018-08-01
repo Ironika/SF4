@@ -55,11 +55,11 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/blog/{id}", name="blog_detail")
+     * @Route("/blog/{slug}", name="blog_detail")
      */
     public function showAction(Request $request)
     {
-        $blog = $this->getDoctrine()->getManager()->getRepository(Blog::class)->find($request->get('id'));
+        $blog = $this->getDoctrine()->getManager()->getRepository(Blog::class)->findOneBy(array('slug' => $request->get('slug')));
         $tags = $this->getDoctrine()->getManager()->getRepository(Tag::class)->findAll();
         $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()->select('p')->from(Product::class, 'p')->orderBy('p.createdAt', 'DESC')->setMaxResults(3);
         $products = $qb->getQuery()->getResult();

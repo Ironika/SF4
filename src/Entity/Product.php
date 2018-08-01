@@ -29,6 +29,11 @@ class Product {
     private $name;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToOne(targetEntity="CategoryProduct", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -111,7 +116,12 @@ class Product {
 
     public function setName($name) {
         $this->name = $name;
+        $this->slug = strtolower( preg_replace( array( '/[^-a-zA-Z0-9\s]/', '/[\s]/' ), array( '', '-' ), $name ) );
         return $this;
+    }
+
+    public function getSlug() {
+        return $this->slug;
     }
 
     public function getCategory() {

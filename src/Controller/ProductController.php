@@ -34,11 +34,11 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/product/{id}", name="product_detail")
+     * @Route("/product/{slug}", name="product_detail")
      */
     public function showAction(Request $request)
     {
-        $product = $this->getDoctrine()->getManager()->getRepository(Product::class)->find($request->get('id'));
+        $product = $this->getDoctrine()->getManager()->getRepository(Product::class)->findOneBy(array('slug' => $request->get('slug')));
         $products = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy(array('collection' => $product->getCollection()));
 
         // replace this example code with whatever you need

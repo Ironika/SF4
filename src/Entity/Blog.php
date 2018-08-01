@@ -25,6 +25,11 @@ class Blog {
     private $title;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $slug;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media")
      */
     private $media;
@@ -70,7 +75,12 @@ class Blog {
 
     public function setTitle($title) {
         $this->title = $title;
+        $this->slug = strtolower( preg_replace( array( '/[^-a-zA-Z0-9\s]/', '/[\s]/' ), array( '', '-' ), $title ) );
         return $this;
+    }
+
+    public function getSlug() {
+        return $this->slug;
     }
 
     public function getContent() {
