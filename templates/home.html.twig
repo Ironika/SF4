@@ -137,11 +137,13 @@
 						<!-- Block2 -->
 						<div class="block2">
 							<div class="block2-pic hov-img0">
-								{% for img in product.gallery.galleryHasMedias %}
-									{% if loop.index == 1 %}
-									    <img src="{% path img.media, 'big' %}" alt="{{ product.name }}">
-									{% endif %}
-								{% endfor %}
+								{% if product.gallery %}
+									{% for img in product.gallery.galleryHasMedias %}
+										{% if loop.index == 1 %}
+										    <img src="{% path img.media, 'big' %}" alt="{{ product.name }}">
+										{% endif %}
+									{% endfor %}
+								{% endif %}
 
 								<a href="{{ path('product_detail', {id: product.id})}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 									View

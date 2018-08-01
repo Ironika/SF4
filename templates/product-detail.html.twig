@@ -33,17 +33,19 @@
 						<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 						<div class="slick3 gallery-lb">
-							{% for img in product.gallery.galleryHasMedias %}
-								<div class="item-slick3" data-thumb="{% path img.media, 'small' %}">
-									<div class="wrap-pic-w pos-relative">
-										<img src="{% path img.media, 'big' %}" alt="{{ product.name }}">
+							{% if product.gallery %}
+								{% for img in product.gallery.galleryHasMedias %}
+									<div class="item-slick3" data-thumb="{% path img.media, 'small' %}">
+										<div class="wrap-pic-w pos-relative">
+											<img src="{% path img.media, 'big' %}" alt="{{ product.name }}">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{% path img.media, 'big' %}">
-											<i class="fa fa-expand"></i>
-										</a>
+											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{% path img.media, 'big' %}">
+												<i class="fa fa-expand"></i>
+											</a>
+										</div>
 									</div>
-								</div>
-							{% endfor %}
+								{% endfor %}
+							{% endif %}
 						</div>
 					</div>
 				</div>
@@ -373,20 +375,22 @@
 						<!-- Block2 -->
 						<div class="block2">
 							<div class="block2-pic hov-img0">
-								{% for img in product.gallery.galleryHasMedias %}
-									{% if loop.index == 1 %}
-									    <img src="{% path img.media, 'big' %}" alt="{{ product.name }}">
-									{% endif %}
-								{% endfor %}
+								{% if product.gallery %}
+									{% for img in product.gallery.galleryHasMedias %}
+										{% if loop.index == 1 %}
+										    <img src="{% path img.media, 'big' %}" alt="{{ product.name }}">
+										{% endif %}
+									{% endfor %}
+								{% endif %}
 
-								<a href="{{ path('product_detail', {id : 1})}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+								<a href="{{ path('product_detail', {id: product.id})}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 									View
 								</a>
 							</div>
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="{{ path('product_detail', {id : 1})}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="{{ path('product_detail', {id: product.id})}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										{{ product.name }}
 									</a>
 
