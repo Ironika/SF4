@@ -1,5 +1,35 @@
 {% extends 'base.html.twig' %}
 
+{% block meta %}
+	{# twitter #}
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="Ineluctable">
+	<meta name="twitter:title" content="{{ product.name }}">
+	<meta name="twitter:description" content="{{ product.name }}">
+	<meta name="twitter:creator" content="admin">
+	<meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() }}{% path product.gallery.galleryHasMedias[0].media, 'small' %}">
+	<meta name="twitter:domain" content="{{ app.request.getSchemeAndHttpHost() }}">
+	{# facebook #}
+	<meta property="og:url"           content="{{ absolute_url(path('product_detail', {'slug' : product.slug})) }}" />
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="Ineluctable" />
+	<meta property="og:description"   content="{{ product.name }}" />
+	<meta property="og:image"         content="{{ app.request.getSchemeAndHttpHost() }}{% path product.gallery.galleryHasMedias[0].media, 'small' %}" />
+{% endblock %}
+
+{% block javascripts %}
+	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+	<script>
+		(function(d, s, id) {
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) return;
+		    js = d.createElement(s); js.id = id;
+		    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+		    fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+{% endblock %}
+
 {% block body %}
 
 <!-- breadcrumb -->
@@ -149,22 +179,28 @@
 
 					<!--  -->
 					<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-						<div class="flex-m bor9 p-r-10 m-r-11">
+						{# <div class="flex-m bor9 p-r-10 m-r-11">
 							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
 								<i class="zmdi zmdi-favorite"></i>
 							</a>
+						</div> #}
+
+						<div id="fb-root"></div>
+						<div class="fb-share-button" 
+						    data-href="{{ absolute_url(path('product_detail', {'slug' : product.slug})) }}" 
+						    data-layout="button_count">
 						</div>
-
-						<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+						
+						{# <a href="#" class="fs-24 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
 							<i class="fa fa-facebook"></i>
-						</a>
+						</a> #}
 
-						<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+						<a class="fs-24 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" target="_blank" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" data-tooltip="Twitter">
 							<i class="fa fa-twitter"></i>
 						</a>
 
-						<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-							<i class="fa fa-google-plus"></i>
+						<a href="#" class="fs-24 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Instagram">
+							<i class="fa fa-instagram"></i>
 						</a>
 					</div>
 				</div>

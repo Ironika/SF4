@@ -43,20 +43,22 @@
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-pic hov-img0">
-									{% for img in product.gallery.galleryHasMedias %}
-										{% if loop.index == 1 %}
-										    <img src="{% path img.media, 'big' %}" alt="{{ product.name }}">
-										{% endif %}
-									{% endfor %}
+									{% if product.gallery %}
+										{% for img in product.gallery.galleryHasMedias %}
+											{% if loop.index == 1 %}
+											    <img src="{% path img.media, 'big' %}" alt="{{ product.name }}">
+											{% endif %}
+										{% endfor %}
+									{% endif %}
 
-									<a href="{{ path('product_detail', {id: product.id})}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+									<a href="{{ path('product_detail', {slug: product.slug})}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 										View
 									</a>
 								</div>
 
 								<div class="block2-txt flex-w flex-t p-t-14">
 									<div class="block2-txt-child1 flex-col-l ">
-										<a href="{{ path('product_detail', {id: product.id})}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										<a href="{{ path('product_detail', {slug: product.slug})}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 											{{ product.name }}
 										</a>
 
@@ -102,7 +104,7 @@
 					<div class="col-sm-6 col-md-4 p-b-40">
 						<div class="blog-item">
 							<div class="hov-img0">
-								<a href="{{ path('blog_detail', {id: blog.id})}}">
+								<a href="{{ path('blog_detail', {slug: blog.slug})}}">
 									<img src="{% path blog.media, 'big' %}" alt="{{ blog.title }}">
 								</a>
 							</div>
@@ -131,7 +133,7 @@
 								</div>
 
 								<h4 class="p-b-12">
-									<a href="{{ path('blog_detail', {id: blog.id})}}" class="mtext-101 cl2 hov-cl1 trans-04">
+									<a href="{{ path('blog_detail', {slug: blog.slug})}}" class="mtext-101 cl2 hov-cl1 trans-04">
 										{{ blog.title }}
 									</a>
 								</h4>

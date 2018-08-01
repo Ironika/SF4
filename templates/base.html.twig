@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        {% block meta %}{% endblock %}
         <title>{% block title %}Ineluctable{% endblock %}</title>
          <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
         {% block stylesheets %}{% endblock %}
