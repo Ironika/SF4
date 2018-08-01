@@ -22,7 +22,8 @@ class BlogAdmin extends AbstractAdmin
             'multiple' => true
         ]);
         $formMapper->add('content', TextareaType::class, array(
-            'required' => false
+            'required' => false,
+            'label' => 'Content *'
         ));
         $formMapper->add('media', ModelListType::class, array());
     }
