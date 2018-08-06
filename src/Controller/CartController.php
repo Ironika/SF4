@@ -24,12 +24,10 @@ class CartController extends Controller
         $cm = $this->get('cart_manager');
         $orderProducts = array();
         $items = $cm->getItems();
-
         $subTotal = 0;
 
         foreach ($items as $key => $value) {
-            $orderProduct = $this->getDoctrine()->getManager()->getRepository(OrderProduct::class)->find($key);
-            $orderProduct->setQuantity($value);
+            $orderProduct = $this->getDoctrine()->getManager()->getRepository(OrderProduct::class)->find($value);
             $orderProducts[] = $orderProduct;
             $subTotal += $orderProduct->getProduct()->getPrice() * $orderProduct->getQuantity();
         }
@@ -66,15 +64,18 @@ class CartController extends Controller
             if($material)
                 $orderProduct->setMaterial($material);
         }
+        if($request->get('quantity')) {
+            $orderProduct->setQuantity($request->get('quantity'));
+        }
 
         $user = $this->getUser(); 
-        $orderProduct->setUser($user);  
+        $orderProduct->setUser($user);
 
         $this->getDoctrine()->getManager()->persist($orderProduct);
         $this->getDoctrine()->getManager()->flush();
 
         $cm = $this->get('cart_manager');
-        $cm->addItem($orderProduct->getId());
+        $cm->addItem($orderProduct->getId(), $orderProduct->getQuantity());
 
         $response = new Response('ok');
 
@@ -87,7 +88,7 @@ class CartController extends Controller
     public function removeAction(Request $request)
     {
         $cm = $this->get('cart_manager');
-        $cm->removeItem($request->get('id'));
+        $cm->removeItem($request->get('id'), $request->get('quantity'));
 
         return $this->redirect($this->generateUrl('cart'));
     }

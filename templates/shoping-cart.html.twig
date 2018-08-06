@@ -78,7 +78,7 @@
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>
-										<a class="remove-item" href="{{ path('cart_remove', {id: orderProduct.id})}}"><i class="fs-16 zmdi zmdi-delete"></i></a>
+										<a class="remove-item" href="{{ path('cart_remove', {id: orderProduct.id, quantity:  orderProduct.quantity })}}"><i class="fs-16 zmdi zmdi-delete"></i></a>
 									</td>
 									<td class="column-5">
 										$ <span class="total-product-price">{{ orderProduct.product.price * orderProduct.quantity }}</span>

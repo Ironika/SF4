@@ -23,15 +23,13 @@ class CartManager
 	/*
 		Adds an id
 	*/
-	public function addItem($id)
+	public function addItem($id, $quantity)
 	{
 		$items = $this->getItems();
 
-        if (!array_key_exists($id, $items)){
-            $items[$id] = 1;
-        } else {
-            $items[$id] += 1;
-        }
+        $items[] = $id;
+
+        $this->session->set('cart_items_number', $this->session->get('cart_items_number') + $quantity);
         
         $this->save($items);
 	}
@@ -39,13 +37,16 @@ class CartManager
 	/*
 		Removes an id
 	*/
-    public function removeItem($id)
+    public function removeItem($id, $quantity)
     {
         $items = $this->getItems();
 
-        if (array_key_exists($id, $items)){
-            unset($items[$id]);
+        foreach ($items as $key => $value) {
+            if($value == $id)
+                unset($items[$key]);
         }
+
+        $this->session->set('cart_items_number', $this->session->get('cart_items_number') - $quantity);
 
         $this->save($items);
     }
@@ -67,6 +68,11 @@ class CartManager
     	if ($items == null){
     		$this->save(array());
     	}
+
+        $quantity = $this->session->get('cart_items_number');
+        if(!$quantity) {
+            $this->session->set('cart_items_number', 0);
+        }
     }
 
 }

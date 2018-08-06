@@ -58,13 +58,19 @@ class OrderProduct {
      */
     private $createdAt;
 
-        /**
+    /**
      * @ORM\Column(name="quantity", type="integer", nullable=true)
      */
     private $quantity;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $state;
+
     public function __construct() {
         $this->createdAt = new \Datetime('now');
+        $this->state = "IN_CART";
     }
 
     public function __toString() {
@@ -94,7 +100,6 @@ class OrderProduct {
 
     public function setShape(Shape $shape) {
         $this->shape = $shape;
-        $shape->addProduct($this);
         return $this;
     }
 
@@ -144,5 +149,15 @@ class OrderProduct {
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    public function setState($state)
+    {
+        $this->state = $state;
     }
 }

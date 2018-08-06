@@ -455,11 +455,13 @@ var Isotope = require('isotope-layout');
             var size_id = $("#size").val();
             var shape_id = $("#shape").val();
             var material_id = $("#material").val();
+            var quantity = parseInt($(".num-product").val());
             var datas = {
                 product: product_id,
                 size : size_id,
                 shape : shape_id,
                 material : material_id,
+                quantity : quantity
             };
             var url = site_url + 'cart/add';
             var nameProduct = $('.js-name-detail').text();
@@ -468,7 +470,7 @@ var Isotope = require('isotope-layout');
                 url: url,
                 data: datas,
                 success: function (data) {
-                    $('.js-show-cart').attr('data-notify', parseInt($('.js-show-cart').attr('data-notify')) + 1);
+                    $('.js-show-cart').attr('data-notify', parseInt($('.js-show-cart').attr('data-notify')) + quantity);
                     swal(nameProduct, "is added to cart !", "success");
                 }
             })
