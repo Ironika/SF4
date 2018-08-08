@@ -33,6 +33,8 @@ class ProductController extends Controller
             $qb->join('p.materials', 'm')->where('m.id = :material')->setParameter('material', $request->request->get('material'));
         if($request->request->get('shape') && $request->request->get('shape') !== 'all')
             $qb->join('p.shapes', 's')->where('s.id = :shape')->setParameter('shape', $request->request->get('shape'));
+        if($request->get('category'))
+            $qb->where('p.category = :category')->setParameter('category', $request->get('category'));
 
         $products = $qb->getQuery()->getResult();
 

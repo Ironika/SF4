@@ -23,17 +23,17 @@
                         <!-- Menu desktop -->
                         <div class="menu-desktop">
                             <ul class="main-menu">
-                                <li>
+                                <li {% if 'home' in app.request.get('_route') %} class="active-menu" {% endif %}>
                                     <a href="{{ path('homepage')}}">Home</a>
                                 </li>
 
-                                <li>
+                                <li {% if 'products' in app.request.get('_route') %} class="active-menu" {% endif %}>
                                     <a href="{{ path('products')}}">Shop</a>
                                     <ul class="sub-menu">
                                         <li>
                                             <a href="#">Bijoux</a>
                                             <ul class="sub-menu-sub">
-                                                <li><a href="#">Boucle d'oreille</a></li>
+                                                <li><a href="{{ path('products', {category: 2}) }}">Boucle d'oreille</a></li>
                                                 <li><a href="#">Raz de Cou</a></li>
                                                 <li><a href="#">Perle</a></li>
                                             </ul>
@@ -57,15 +57,15 @@
                                     </ul>
                                 </li>
 
-                                <li>
+                                <li {% if 'blog' in app.request.get('_route') %} class="active-menu" {% endif %}>
                                     <a href="{{ path('blog')}}">Blog</a>
                                 </li>
 
-                                <li>
+                                <li {% if 'about' in app.request.get('_route') %} class="active-menu" {% endif %}>
                                     <a href="{{ path('about')}}">About</a>
                                 </li>
 
-                                <li>
+                                <li {% if 'contact' in app.request.get('_route') %} class="active-menu" {% endif %}>
                                     <a href="{{ path('contact')}}">Contact</a>
                                 </li>
                             </ul>
@@ -194,10 +194,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-lg-3 p-b-50">
-                        {{  render(controller(
-                            'App\\Controller\\CategoryProductController::listAction'
-                            )) 
-                        }}
+                        {{  render(controller('App\\Controller\\CategoryProductController::listAction', {'route': app.request.get('_route')}))}}
                     </div>
 
                     <div class="col-sm-6 col-lg-3 p-b-50">

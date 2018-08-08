@@ -64,13 +64,13 @@ class OrderProduct {
     private $quantity;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="Order", inversedBy="orderProducts")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $state;
+    private $order;
 
     public function __construct() {
         $this->createdAt = new \Datetime('now');
-        $this->state = "IN_CART";
     }
 
     public function __toString() {
@@ -151,13 +151,13 @@ class OrderProduct {
         $this->user = $user;
     }
 
-    public function getState()
+    public function getOrder()
     {
-        return $this->state;
+        return $this->order;
     }
 
-    public function setState($state)
+    public function setOrder($order)
     {
-        $this->state = $state;
+        $this->order = $order;
     }
 }

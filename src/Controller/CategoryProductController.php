@@ -18,7 +18,8 @@ class CategoryProductController extends Controller
         $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findAll();
         // replace this example code with whatever you need
         return $this->render('categories-list.html.twig', array(
-            'categories' => $categories
+            'categories' => $categories,
+            'route' => $request->get('route')
         ));
     }
 }

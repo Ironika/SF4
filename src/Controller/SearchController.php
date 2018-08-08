@@ -20,19 +20,19 @@ class SearchController extends Controller
                    ->where('b.title LIKE :title')
                    ->setParameter('title', '%' . $request->get('search') .'%')
                    ->getQuery();
-        $blogs = $queryBlogs->getResult();
+      $blogs = $queryBlogs->getResult();
 
     	$repoProducts = $this->getDoctrine()->getManager()->getRepository(Product::class);
     	$queryProducts = $repoProducts->createQueryBuilder('p')
                    ->where('p.name LIKE :title')
                    ->setParameter('title', '%' . $request->get('search') .'%')
                    ->getQuery();
-        $products = $queryProducts->getResult();
+      $products = $queryProducts->getResult();
 
-        return $this->render('search.html.twig', array(
-        	'search' => $request->get('search'),
-            'blogs' => $blogs,
-            'products' => $products
-        ));
+      return $this->render('search.html.twig', array(
+      	'search' => $request->get('search'),
+        'blogs' => $blogs,
+        'products' => $products
+      ));
     }
 }
