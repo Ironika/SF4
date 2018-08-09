@@ -5,3 +5,6 @@ fos_user:
     from_email:
         address: "no-reply@mon-mail.fr"
         sender_name: "no-reply@mon-mail.fr"
+    profile:
+       form:
+           type: App\Form\Type\ProfileFormType

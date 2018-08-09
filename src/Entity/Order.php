@@ -23,6 +23,11 @@ class Order
     /**
      * @ORM\Column(type="string")
      */
+    protected $uniqId;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected $state;
 
     /**
@@ -42,16 +47,26 @@ class Order
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $total;
+
 
     public function __construct()
     {
-       $this->state = 'IN_WAITING';
+       $this->state = 'PROCESSING';
        $this->$orderProducts = new ArrayCollection();
        $this->createdAt = new \Datetime('now');
+       $this->uniqId = uniqid();
     }
 
     public function getId() {
         return $this->id;
+    }
+
+    public function getUniqId() {
+        return $this->uniqId;
     }
 
     public function getState() {
@@ -103,6 +118,15 @@ class Order
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    public function getTotal() {
+        return $this->total;
+    }
+
+    public function setTotal($total) {
+        $this->total = $total;
+        return $this;
     }
 
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "383bf0fdb704af0b4f427504d5469159",
+    "content-hash": "fccb8cb9f0d4bf0982936338443e67d4",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -4860,16 +4860,16 @@
         },
         {
             "name": "symfony/intl",
-            "version": "v4.0.9",
+            "version": "v4.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/intl.git",
-                "reference": "d58df88e3cfdb2702f5fd8cd67c33961c2539e0c"
+                "reference": "ab0fba135f163ca6e1d72ab6fdeac49e0285e6b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/d58df88e3cfdb2702f5fd8cd67c33961c2539e0c",
-                "reference": "d58df88e3cfdb2702f5fd8cd67c33961c2539e0c",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/ab0fba135f163ca6e1d72ab6fdeac49e0285e6b0",
+                "reference": "ab0fba135f163ca6e1d72ab6fdeac49e0285e6b0",
                 "shasum": ""
             },
             "require": {
@@ -4885,7 +4885,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.0-dev"
+                    "dev-master": "4.1-dev"
                 }
             },
             "autoload": {
@@ -4931,7 +4931,7 @@
                 "l10n",
                 "localization"
             ],
-            "time": "2018-04-02T09:52:41+00:00"
+            "time": "2018-08-01T08:24:03+00:00"
         },
         {
             "name": "symfony/lts",

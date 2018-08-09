@@ -12,6 +12,7 @@ use App\Entity\Product;
 use App\Entity\Size;
 use App\Entity\Shape;
 use App\Entity\Material;
+use Symfony\Component\Intl\Intl;
 
 class CartController extends Controller
 {
@@ -26,6 +27,8 @@ class CartController extends Controller
         $items = $cm->getItems();
         $subTotal = 0;
 
+        $countries = Intl::getRegionBundle()->getCountryNames();
+
         foreach ($items as $key => $value) {
             $orderProduct = $this->getDoctrine()->getManager()->getRepository(OrderProduct::class)->find($value);
             $orderProducts[] = $orderProduct;
@@ -35,7 +38,8 @@ class CartController extends Controller
         // replace this example code with whatever you need
         return $this->render('shoping-cart.html.twig', array(
             'orderProducts' => $orderProducts,
-            'subTotal' => $subTotal
+            'subTotal' => $subTotal,
+            'countries' => $countries
         ));
     }
 

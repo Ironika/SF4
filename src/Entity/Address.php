@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 
 /**
  * @ORM\Entity
@@ -36,6 +37,16 @@ class Address
      * @ORM\Column(type="string")
      */
     protected $zipcode;
+
+    /**
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $user;
+
+    public function __toString(){
+        return $this->address;
+    }
 
     public function getId() {
         return $this->id;
@@ -74,6 +85,15 @@ class Address
 
     public function setZipcode($zipcode) {
         $this->zipcode = $zipcode;
+        return $this;
+    }
+
+    public function getUser() {
+        return $this->user;
+    }
+
+    public function setUser($user) {
+        $this->user = $user;
         return $this;
     }
 }

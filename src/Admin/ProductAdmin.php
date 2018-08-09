@@ -44,10 +44,6 @@ class ProductAdmin extends AbstractAdmin
             ]);
         $formMapper->add('price', TextType::class);
         $formMapper->add('gallery', ModelListType::class);
-        $formMapper->add('shortDescription', TextareaType::class, array(
-            'required' => false,
-            'label' => 'Short Description *'
-        ));
         $formMapper->add('description', TextareaType::class, array(
             'required' => false,
             'label' => 'Description *'

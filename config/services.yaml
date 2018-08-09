@@ -32,6 +32,11 @@ services:
         arguments: ["@session"]
         public: true
 
+    app.form.profile:
+       class: App\Form\Type\ProfileFormType
+       tags:
+           - { name: form.type, alias: app_user_profile }
+
     # SONATA ADMIN
 
     admin.category_product:
