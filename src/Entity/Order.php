@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 use App\Entity\OrderProducts;
 use App\Entity\Address;
 
@@ -37,7 +39,7 @@ class Order
     protected $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="OrderProduct", mappedBy="order", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="OrderProduct", mappedBy="order", orphanRemoval=true, cascade="persist")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $orderProducts;
@@ -56,7 +58,7 @@ class Order
     public function __construct()
     {
        $this->state = 'PROCESSING';
-       $this->$orderProducts = new ArrayCollection();
+       $this->orderProducts = new ArrayCollection();
        $this->createdAt = new \Datetime('now');
        $this->uniqId = uniqid();
     }

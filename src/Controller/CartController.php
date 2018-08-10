@@ -12,6 +12,7 @@ use App\Entity\Product;
 use App\Entity\Size;
 use App\Entity\Shape;
 use App\Entity\Material;
+use App\Entity\Order;
 use Symfony\Component\Intl\Intl;
 
 class CartController extends Controller
@@ -95,5 +96,40 @@ class CartController extends Controller
         $cm->removeItem($request->get('id'), $request->get('quantity'));
 
         return $this->redirect($this->generateUrl('cart'));
+    }
+
+    /**
+     * @Route("/cart/payment", name="cart_payment")
+     */
+    public function paymentAction(Request $request)
+    {
+        $user = $this->getUser();
+
+        if(!$user)
+            return $this->redirect($this->generateUrl('fos_user_profile_show'));
+
+        $order = new Order();
+        $cm = $this->get('cart_manager');
+        $items = $cm->getItems();
+        $orderProducts = array();
+        $total = 0;
+
+        foreach ($items as $key => $value) {
+            $orderProduct = $this->getDoctrine()->getManager()->getRepository(OrderProduct::class)->find($value);
+            $orderProduct->setOrder($order);
+            $orderProducts[] = $orderProduct;
+            $total += $orderProduct->getProduct()->getPrice() * $orderProduct->getQuantity();
+        }
+        $order->setOrderProducts($orderProducts);
+        $order->setUser($user);
+        $order->setTotal($total);
+
+        $this->getDoctrine()->getManager()->persist($order);
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->get('session')->remove("cart_items");
+        $this->get('session')->remove("cart_items_number");
+
+        return $this->redirect($this->generateUrl('fos_user_profile_show'));
     }
 }
