@@ -16,6 +16,11 @@ class Address
     protected $street;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $streetAdd;
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $city;
@@ -30,6 +35,11 @@ class Address
      */
     protected $zipcode;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $state;
+
     public function __toString(){
         return $this->street;
     }
@@ -40,6 +50,15 @@ class Address
 
     public function setStreet($street) {
         $this->street = $street;
+        return $this;
+    }
+
+    public function getStreetAdd() {
+        return $this->streetAdd;
+    }
+
+    public function setStreetAdd($streetAdd) {
+        $this->streetAdd = $streetAdd;
         return $this;
     }
 
@@ -67,6 +86,15 @@ class Address
 
     public function setZipcode($zipcode) {
         $this->zipcode = $zipcode;
+        return $this;
+    }
+
+    public function getState() {
+        return $this->state;
+    }
+
+    public function setState($state) {
+        $this->state = $state;
         return $this;
     }
 }

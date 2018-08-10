@@ -65,7 +65,7 @@ class OrderProduct {
 
     /**
      * @ORM\ManyToOne(targetEntity="Order", inversedBy="orderProducts")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $order;
 

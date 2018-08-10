@@ -14,7 +14,9 @@
 			        <h4>Delivery Address</h4>
 			        <p>{{ user.fullName }}</p>
 			        <p>{{ user.addressDelivery.street }}</p>
+			        <p>{{ user.addressDelivery.streetAdd }}</p>
 			        <p>{{ user.addressDelivery.city }} / {{ user.addressDelivery.zipcode }}</p>
+			        <p>{{ user.addressDelivery.state }}</p>
 			        <p>{{ user.addressDelivery.country }}</p>
 			    </div>
 	        {% endif %}
@@ -23,7 +25,9 @@
 			        <h4>Billing Address</h4>
 			        <p>{{ user.fullName }}</p>
 			        <p>{{ user.addressBilling.street }}</p>
+			        <p>{{ user.addressBilling.streetAdd }}</p>
 			        <p>{{ user.addressBilling.city }} / {{ user.addressBilling.zipcode }}</p>
+			        <p>{{ user.addressBilling.state }}</p>
 			        <p>{{ user.addressBilling.country }}</p>
 			    </div>
 	        {% endif %}
@@ -47,7 +51,7 @@
 		        			<td>{{ order.state }}</td>
 		        			<td>{{ order.createdAt|date("d/m/Y")}}</td>
 		        			<td>{{ order.total }} €</td>
-		        			<td><a href="">Detail</a></td>
+		        			<td><a href="{{ path('order', {orderNumber: order.uniqId})}}">Detail</a></td>
 		        		</tr>
 		        	{% endfor %}
 	        	</tbody>
