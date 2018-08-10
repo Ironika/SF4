@@ -6,7 +6,8 @@ namespace App\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Order;
-use App\Entity\Address;
+use App\Entity\AddressDelivery;
+use App\Entity\AddressBilling;
 
 /**
  * @ORM\Entity
@@ -32,13 +33,13 @@ class User extends BaseUser
     protected $lastName;
 
     /**
-     * @ORM\OneToOne(targetEntity="Address")
+     * @ORM\OneToOne(targetEntity="AddressDelivery", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
-    protected $address;
+    protected $addressDelivery;
 
     /**
-     * @ORM\OneToOne(targetEntity="Address")
+     * @ORM\OneToOne(targetEntity="AddressBilling", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     protected $addressBilling;
@@ -92,17 +93,17 @@ class User extends BaseUser
         return $this->firstName . ' ' . $this->lastName;
     }
 
-    public function getAddress() {
-        return $this->address;
+    public function getAddressDelivery() {
+        return $this->addressDelivery;
     }
 
-    public function setAddress($address) {
-        $this->address = $address;
+    public function setAddressDelivery($addressDelivery) {
+        $this->addressDelivery = $addressDelivery;
         return $this;
     }
 
     public function getAddressBilling() {
-        return $this->address;
+        return $this->addressBilling;
     }
 
     public function setAddressBilling($addressBilling) {

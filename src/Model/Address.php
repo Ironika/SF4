@@ -1,27 +1,19 @@
 <?php
 
-namespace App\Entity;
+namespace App\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\User;
 
 /**
- * @ORM\Entity
+ * @ORM\MappedSuperclass
  * @ORM\Table(name="`address`")
  */
 class Address
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    /**
      * @ORM\Column(type="string")
      */
-    protected $address;
+    protected $street;
 
     /**
      * @ORM\Column(type="string")
@@ -38,26 +30,16 @@ class Address
      */
     protected $zipcode;
 
-    /**
-     * @ORM\OneToOne(targetEntity="User")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    protected $user;
-
     public function __toString(){
-        return $this->address;
+        return $this->street;
     }
 
-    public function getId() {
-        return $this->id;
+    public function getStreet() {
+        return $this->street;
     }
 
-    public function getAddress() {
-        return $this->address;
-    }
-
-    public function setAddress($address) {
-        $this->address = $address;
+    public function setStreet($street) {
+        $this->street = $street;
         return $this;
     }
 
@@ -85,15 +67,6 @@ class Address
 
     public function setZipcode($zipcode) {
         $this->zipcode = $zipcode;
-        return $this;
-    }
-
-    public function getUser() {
-        return $this->user;
-    }
-
-    public function setUser($user) {
-        $this->user = $user;
         return $this;
     }
 }

@@ -4,30 +4,26 @@ namespace App\Form\Type;
  
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use App\Entity\Address;
 use App\Form\Type\AddressFormType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
- 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\AddressDelivery;
+use App\Entity\AddressBilling;
+
 class ProfileFormType extends AbstractType
 {
    public function buildForm(FormBuilderInterface $builder, array $options)
    {
       $builder->add('firstName');
       $builder->add('lastName');
-      // $builder->add(
-      //   $builder->create('address', FormType::class, array('by_reference' => false))
-      //         ->add('address', TextType::class)
-      //         ->add('city', TextType::class)
-      //         ->add('zipcode', TextType::class)
-      //         ->add('country', TextType::class)
-      // );
-      // $builder->add('address',CollectionType::class,array(
-      //   'entry_type'=> AddressFormType::class,
-      //   'allow_add'=>true,
-      //   'allow_delete'=>true
-      // ));
+      $builder->add('addressDelivery', AddressFormType::class, array(
+        'data_class' => AddressDelivery::class
+      ));
+      $builder->add('addressBilling', AddressFormType::class, array(
+        'data_class' => AddressBilling::class
+      ));
    }
  
    public function getParent()

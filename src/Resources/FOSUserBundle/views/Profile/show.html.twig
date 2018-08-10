@@ -2,26 +2,27 @@
 {% extends "layout.html.twig" %}
 
 {% block fos_user_content %}
+	<a href="{{ path('fos_user_profile_edit') }}">Edit Profile</a>
     <div class="fos_user_user_show">
     	<br>
         <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
         <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
         <br>
         <div class="row">
-	        {% if user.address %}
+	        {% if user.addressDelivery %}
 	        	<div class="col-12 col-md-6">
-			        <h4>Address</h4>
+			        <h4>Delivery Address</h4>
 			        <p>{{ user.fullName }}</p>
-			        <p>{{ user.address.address }}</p>
-			        <p>{{ user.address.city }} / {{ user.address.zipcode }}</p>
-			        <p>{{ user.address.country }}</p>
+			        <p>{{ user.addressDelivery.street }}</p>
+			        <p>{{ user.addressDelivery.city }} / {{ user.addressDelivery.zipcode }}</p>
+			        <p>{{ user.addressDelivery.country }}</p>
 			    </div>
 	        {% endif %}
 	        {% if user.addressBilling %}
 	        	<div class="col-12 col-md-6">
-			        <h4>Address Billing</h4>
+			        <h4>Billing Address</h4>
 			        <p>{{ user.fullName }}</p>
-			        <p>{{ user.addressBilling.address }}</p>
+			        <p>{{ user.addressBilling.street }}</p>
 			        <p>{{ user.addressBilling.city }} / {{ user.addressBilling.zipcode }}</p>
 			        <p>{{ user.addressBilling.country }}</p>
 			    </div>
