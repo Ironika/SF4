@@ -32,6 +32,11 @@ services:
         arguments: ["@session"]
         public: true
 
+    instagram_manager:
+        class: App\Service\InstagramManager
+        arguments: ["@session"]
+        public: true
+
     app.form.profile:
        class: App\Form\Type\ProfileFormType
        tags:
