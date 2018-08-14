@@ -19,6 +19,7 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request)
     {
+        // $this->get('session')->clear();
         $tags = $this->getDoctrine()->getManager()->getRepository(Tag::class)->findAll();
 
         $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()->select('p')->from(Product::class, 'p')->orderBy('p.createdAt', 'DESC')->setMaxResults(3);

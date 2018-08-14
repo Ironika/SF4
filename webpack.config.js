@@ -29,6 +29,7 @@ Encore
     .addEntry('js/plugins/textcolor/plugin', './node_modules/tinymce/plugins/textcolor/plugin.js')
     .addEntry('js/map-custom', './assets/js/map-custom.js')
     .addEntry('js/slick-custom', './assets/js/slick-custom.js')
+    .addEntry('js/instagram-feed', './assets/js/jquery.instagramFeed.min.js')
     .addEntry('js/main', './assets/js/main.js')
     .addEntry('js/app', './assets/js/app.js')
 

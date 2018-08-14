@@ -246,8 +246,16 @@
 		</div>
 	</div>
 </section>
-{# {{  render(controller('App\\Controller\\HomeController::instagramAction', {code : app.request.query.get('code') }))}} #}
-{% if instagramMedias|length %}
+
+<section class="sec-product bg0 p-t-30 p-b-50" style="overflow: scroll;">
+	<div class="container">
+		<div id="instagram-feed1">
+			
+		</div>
+	</div>
+</section>
+
+{# {% if instagramMedias|length %}
 	<section class="sec-product bg0 p-t-30 p-b-50">
 		<div class="container">
 			<div class="p-b-32">
@@ -272,7 +280,7 @@
 			</div>
 		</div>
 	</section>
-{% endif %}
+{% endif %} #}
 
 {% endblock %}
 

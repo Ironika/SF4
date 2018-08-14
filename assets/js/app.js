@@ -28,3 +28,19 @@ $(document).ready(function() {
 	}
 	// $("textarea").attr('required', 'required');
 });
+
+$(window).on('load', function(){
+	$.instagramFeed({
+		'username': 'mayumisei',
+		'container': "#instagram-feed1",
+		// 'display_profile': true,
+		// 'display_biography': true,
+		'display_gallery': true,
+		'get_raw_json': false,
+		'callback': null,
+		'styling': true,
+		'items': 12,
+		'items_per_row': 4,
+		'margin': 1 
+	});
+});
