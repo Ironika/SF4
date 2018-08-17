@@ -82,11 +82,6 @@ class Product {
     private $description;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    private $shortDescription;
-
-    /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
@@ -228,15 +223,6 @@ class Product {
 
     public function setDescription($description) {
         $this->description = $description;
-        return $this;
-    }
-
-    public function getShortDescription() {
-        return $this->shortDescription;
-    }
-
-    public function setShortDescription($shortDescription) {
-        $this->shortDescription = $shortDescription;
         return $this;
     }
 
