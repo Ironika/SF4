@@ -106,3 +106,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Slide, group: "Slider" }
         public: true
+
+    admin.order:
+        class: App\Admin\OrderAdmin
+        arguments: [~, App\Entity\Order, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Order, group: "Order" }
+        public: true

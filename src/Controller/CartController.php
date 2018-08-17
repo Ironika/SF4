@@ -73,9 +73,6 @@ class CartController extends Controller
             $orderProduct->setQuantity($request->get('quantity'));
         }
 
-        $user = $this->getUser(); 
-        $orderProduct->setUser($user);
-
         $this->getDoctrine()->getManager()->persist($orderProduct);
         $this->getDoctrine()->getManager()->flush();
 
@@ -112,17 +109,14 @@ class CartController extends Controller
         $cm = $this->get('cart_manager');
         $items = $cm->getItems();
         $orderProducts = array();
-        $total = 0;
 
         foreach ($items as $key => $value) {
             $orderProduct = $this->getDoctrine()->getManager()->getRepository(OrderProduct::class)->find($value);
             $orderProduct->setOrder($order);
             $orderProducts[] = $orderProduct;
-            $total += $orderProduct->getProduct()->getPrice() * $orderProduct->getQuantity();
         }
         $order->setOrderProducts($orderProducts);
         $order->setUser($user);
-        $order->setTotal($total);
 
         $this->getDoctrine()->getManager()->persist($order);
         $this->getDoctrine()->getManager()->flush();

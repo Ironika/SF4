@@ -17,7 +17,14 @@
 	<div class="content">
 	    <div>
 	        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-	            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+	            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} 
+	            {% if is_granted('ROLE_ADMIN') %}
+	            |
+				<a href="{{ path('sonata_admin_dashboard') }}">
+	                Go to Dashboard
+	            </a>
+	        	{% endif %}
+	            |
 	            <a href="{{ path('fos_user_security_logout') }}">
 	                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
 	            </a>

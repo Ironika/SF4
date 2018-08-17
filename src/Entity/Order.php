@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 use App\Entity\OrderProducts;
 use App\Entity\Address;
+use App\Entity\User;
 
 /**
  * @ORM\Entity
@@ -49,12 +50,6 @@ class Order
      */
     private $createdAt;
 
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $total;
-
-
     public function __construct()
     {
        $this->state = 'PROCESSING';
@@ -75,7 +70,7 @@ class Order
         return $this->state;
     }
 
-    public function setState($state) {
+    public function setState(String $state) {
         $this->state = $state;
         return $this;
     }
@@ -84,7 +79,7 @@ class Order
         return $this->user;
     }
 
-    public function setUser($user) {
+    public function setUser(User $user) {
         $this->user = $user;
         return $this;
     }
@@ -123,12 +118,11 @@ class Order
     }
 
     public function getTotal() {
-        return $this->total;
-    }
-
-    public function setTotal($total) {
-        $this->total = $total;
-        return $this;
+        $total = 0;
+        foreach ($this->orderProducts as $orderProduct) {
+            $total += $orderProduct->getProduct()->getPrice() * $orderProduct->getQuantity();
+        }
+        return $total;
     }
 
 }

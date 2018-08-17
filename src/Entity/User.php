@@ -64,11 +64,7 @@ class User extends BaseUser
     }
 
     public function __toString() {
-        $string = '';
-        if($this->id)
-            $string = $this->id;
-
-        return $string;
+        return $this->getEmail();
     }
 
     public function getFirstName() {

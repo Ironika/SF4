@@ -9,6 +9,7 @@ use App\Entity\Product;
 use App\Entity\Size;
 use App\Entity\Shape;
 use App\Entity\Material;
+use App\Entity\Order;
 
 /**
  * @ORM\Entity
@@ -24,7 +25,7 @@ class OrderProduct {
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Product", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     private $product;
@@ -48,18 +49,12 @@ class OrderProduct {
     private $shape;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $user;
-
-    /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(name="quantity", type="integer", nullable=true)
+     * @ORM\Column(name="quantity", type="integer")
      */
     private $quantity;
 
@@ -74,11 +69,7 @@ class OrderProduct {
     }
 
     public function __toString() {
-        $string = '';
-        if($this->name)
-            $string = $this->name;
-
-        return $string;
+        return $this->getProduct()->getName();
     }
 
     public function getId() {
@@ -89,7 +80,8 @@ class OrderProduct {
         return $this->product;
     }
 
-    public function setProduct($product) {
+    public function setProduct(Product $product) {
+        die(var_dump($product));
         $this->product = $product;
         return $this;
     }
@@ -139,16 +131,6 @@ class OrderProduct {
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
-    }
-
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    public function setUser($user)
-    {
-        $this->user = $user;
     }
 
     public function getOrder()
