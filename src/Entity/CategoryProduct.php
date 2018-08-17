@@ -31,7 +31,7 @@ class CategoryProduct {
 
     // connexion one to many entre category et product
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="category", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $products;
 
