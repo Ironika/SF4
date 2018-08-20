@@ -50,7 +50,7 @@ class OrderAdmin extends AbstractAdmin
         $listMapper->addIdentifier('uniqId');
         $listMapper->add('createdAt');
         $listMapper->add('state');
-        $listMapper->add('total');
+        $listMapper->add('total', null, array('label' => 'total ($)'));
         $listMapper->add('orderProducts');
         $listMapper->add('user');
     }
