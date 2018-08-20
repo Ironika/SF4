@@ -31,10 +31,10 @@ $(document).ready(function() {
 
 $(window).on('load', function(){
 	$.instagramFeed({
-		'username': 'mayumisei',
+		'username': 'the.ineluctable',
 		'container': "#instagram-feed1",
-		// 'display_profile': true,
-		// 'display_biography': true,
+		'display_profile': false,
+		'display_biography': false,
 		'display_gallery': true,
 		'get_raw_json': false,
 		'callback': null,
