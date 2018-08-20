@@ -20,12 +20,12 @@
 	            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} 
 	            {% if is_granted('ROLE_ADMIN') %}
 	            |
-				<a href="{{ path('sonata_admin_dashboard') }}">
+				<a href="{{ path('sonata_admin_dashboard') }}" class="cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04" style="padding:10px; margin-right: 5px;">
 	                Go to Dashboard
 	            </a>
 	        	{% endif %}
 	            |
-	            <a href="{{ path('fos_user_security_logout') }}">
+	            <a href="{{ path('fos_user_security_logout') }}" class="cl0 size-103 bg3 bor1 hov-btn2 p-lr-15 trans-04" style="padding:10px;">
 	                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
 	            </a>
 	        {# {% else %}
