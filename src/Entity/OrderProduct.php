@@ -69,7 +69,10 @@ class OrderProduct {
     }
 
     public function __toString() {
-        return $this->getProduct()->getName();
+        if($this->getProduct())
+            return $this->getProduct()->getName();
+        else
+            return OrderProduct::class;
     }
 
     public function getId() {
@@ -81,7 +84,6 @@ class OrderProduct {
     }
 
     public function setProduct(Product $product) {
-        die(var_dump($product));
         $this->product = $product;
         return $this;
     }
@@ -138,7 +140,7 @@ class OrderProduct {
         return $this->order;
     }
 
-    public function setOrder($order)
+    public function setOrder(Order $order)
     {
         $this->order = $order;
     }

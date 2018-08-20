@@ -58,6 +58,10 @@ class Order
        $this->uniqId = uniqid();
     }
 
+    public function __toString(){
+        return $this->getUniqId();
+    }
+
     public function getId() {
         return $this->id;
     }
@@ -93,8 +97,9 @@ class Order
         return $this;
     }
 
-    public function addOrderProduct(OrderProduct $orderProduct) {
+    public function addOrderProduct($orderProduct) { 
         if(!$this->orderProducts->contains($orderProduct)) {
+            $orderProduct->setOrder($this);
             $this->orderProducts[] = $orderProduct;
         }
         return $this;

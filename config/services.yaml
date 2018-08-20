@@ -113,3 +113,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Order, group: "Order" }
         public: true
+
+    admin.order_product:
+        class: App\Admin\OrderProductAdmin
+        arguments: [~, App\Entity\OrderProduct, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: OrderProduct, group: "Order" }
+        public: true
