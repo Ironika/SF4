@@ -108,14 +108,11 @@ class CartController extends Controller
         $order = new Order();
         $cm = $this->get('cart_manager');
         $items = $cm->getItems();
-        $orderProducts = array();
 
         foreach ($items as $key => $value) {
             $orderProduct = $this->getDoctrine()->getManager()->getRepository(OrderProduct::class)->find($value);
-            $orderProduct->setOrder($order);
-            $orderProducts[] = $orderProduct;
+            $order->addOrderProduct($orderProduct);
         }
-        $order->setOrderProducts($orderProducts);
         $order->setUser($user);
 
         $this->getDoctrine()->getManager()->persist($order);
