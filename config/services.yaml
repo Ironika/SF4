@@ -120,3 +120,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: OrderProduct, group: "Order" }
         public: true
+
+    admin.newsletter:
+        class: App\Admin\NewsletterAdmin
+        arguments: [~, App\Entity\Newsletter, App\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Newsletter, group: "Newsletter" }
+        public: true
