@@ -33,10 +33,10 @@ class HomeController extends Controller
 
         $slides = $this->getDoctrine()->getManager()->getRepository(Slide::class)->findAll();
 
-        $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()->select('p')->from(Product::class, 'p')->orderBy('p.createdAt', 'DESC')->setMaxResults(8);
+        $qb = $this->getDoctrine()->getManager()->createQueryBuilder()->select('p')->from(Product::class, 'p')->orderBy('p.createdAt', 'DESC')->setMaxResults(8);
         $products = $qb->getQuery()->getResult();
 
-        $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()->select('b')->from(Blog::class, 'b')->orderBy('b.createdAt', 'DESC')->setMaxResults(3);
+        $qb = $this->getDoctrine()->getManager()->createQueryBuilder()->select('b')->from(Blog::class, 'b')->orderBy('b.createdAt', 'DESC')->setMaxResults(3);
         $blogs = $qb->getQuery()->getResult();
 
         return $this->render('home.html.twig', array(
