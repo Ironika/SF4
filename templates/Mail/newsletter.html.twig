@@ -4,4 +4,24 @@
 
 {{ content|raw }}
 
+{% for product in products %}
+	<div>
+		{% if product.gallery %}
+			{% for img in product.gallery.galleryHasMedias %}
+				{% if loop.index == 1 %}
+					{{ img.media }}
+				    <img src="{% path img.media, 'big' %}" alt="{{ product.name }}">
+					}
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		<a href="{{ url('product_detail', {slug : product.slug})}}" class="">
+			{{ product.name }}
+		</a>
+		<span class="">
+			${{ product.price }}
+		</span>
+	</div>
+{% endfor %}
+
 <img style="width: 200px;" src="{{ absolute_url(asset('images/logo.png')) }}">

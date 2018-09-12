@@ -7,6 +7,10 @@
     	<br>
         <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
         <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+        {% if user.haveSubscribeNewsletter %}
+        	<br>
+        	<p>You have subscribe to the newsletter</p>
+    	{% endif %}
         <br>
         <div class="row">
 	        {% if user.addressDelivery %}

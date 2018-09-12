@@ -18,6 +18,7 @@ class UserFixtures extends Fixture
         $admin->setPlainPassword('admin');
         $admin->setUsername('admin');
         $admin->setSuperAdmin(true);
+        $admin->setHaveSubscribeNewsletter(false);
 
         // -------- Customer 1
 
@@ -42,6 +43,7 @@ class UserFixtures extends Fixture
         $customer1->setLastName('Vandame');
         $customer1->setAddressDelivery($addressDelivery1);
         $customer1->setAddressBilling($addressBilling1);
+        $customer1->setHaveSubscribeNewsletter(true);
 
         // -------- Customer 2
 
@@ -66,6 +68,7 @@ class UserFixtures extends Fixture
         $customer2->setLastName("L'asticot");
         $customer2->setAddressDelivery($addressDelivery2);
         $customer2->setAddressBilling($addressBilling2);
+        $customer2->setHaveSubscribeNewsletter(true);
 
         $manager->persist($admin);
         $manager->persist($customer1);

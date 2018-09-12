@@ -51,6 +51,11 @@ class User extends BaseUser
     protected $orders;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $haveSubscribeNewsletter;
+
+    /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
@@ -128,6 +133,16 @@ class User extends BaseUser
             $this->orders->removeElement($order);
         }
         return $this;
+    }
+
+    public function getHaveSubscribeNewsletter()
+    {
+        return $this->haveSubscribeNewsletter;
+    }
+
+    public function setHaveSubscribeNewsletter($haveSubscribeNewsletter)
+    {
+        $this->haveSubscribeNewsletter = $haveSubscribeNewsletter;
     }
 
     public function getCreatedAt()

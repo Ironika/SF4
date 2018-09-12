@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use App\Form\Type\AddressFormType;
 use App\Entity\AddressDelivery;
 use App\Entity\AddressBilling;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ProfileFormType extends AbstractType
 {
@@ -20,6 +21,10 @@ class ProfileFormType extends AbstractType
       ));
       $builder->add('addressBilling', AddressFormType::class, array(
         'data_class' => AddressBilling::class
+      ));
+      $builder->add('haveSubscribeNewsletter', CheckboxType::class, array(
+          'label'    => 'Subscribe to the newsletter?',
+          'required' => false,
       ));
    }
  
