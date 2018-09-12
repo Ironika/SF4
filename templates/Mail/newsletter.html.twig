@@ -5,23 +5,27 @@
 {{ content|raw }}
 
 {% for product in products %}
-	<div>
-		{% if product.gallery %}
-			{% for img in product.gallery.galleryHasMedias %}
-				{% if loop.index == 1 %}
-					{{ img.media }}
-				    <img src="{% path img.media, 'big' %}" alt="{{ product.name }}">
-					}
-				{% endif %}
-			{% endfor %}
-		{% endif %}
-		<a href="{{ url('product_detail', {slug : product.slug})}}" class="">
-			{{ product.name }}
+	<div style="display:inline-block;width:200px;padding:10px;">
+		<a href="{{ url('product_detail', {slug : product.slug})}}">
+			{% if product.gallery %}
+				{% for img in product.gallery.galleryHasMedias %}
+					{% if loop.index == 1 %}
+					    <img src="{{app.request.scheme ~ '://' ~ app.request.host}}{% path img.media, 'reference' %}" alt="{{ product.name }}" style="width:100%; object-fit:cover;">
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+			<div style="padding: 10px 0;">
+				<span style="float:left; color: black;">
+					{{ product.name }}
+				</span>
+				<span style="float:right; color: black;">
+					${{ product.price }}
+				</span>
+			</div>
 		</a>
-		<span class="">
-			${{ product.price }}
-		</span>
 	</div>
 {% endfor %}
 
-<img style="width: 200px;" src="{{ absolute_url(asset('images/logo.png')) }}">
+<div style="text-align:center;margin-top: 50px;">
+	<img style="width: 200px; margin:auto" src="{{ absolute_url(asset('images/logo.png')) }}">
+</div>
