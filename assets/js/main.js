@@ -266,19 +266,26 @@ var Isotope = require('isotope-layout');
         var numProduct = Number($(this).next().val());
         if(numProduct > 1) {
             $(this).next().val(numProduct - 1);
-            var price = parseInt($(this).parent().parent().parent().find('.product-price').text());
-            var totalPrice = parseInt($(this).parent().parent().parent().find('.total-product-price').text())
-            $(this).parent().parent().parent().find('.total-product-price').text(totalPrice - price);
+            var price = parseFloat($(this).parent().parent().parent().find('.product-price').text()).toFixed(2);
+            var totalProductPrice = parseFloat($(this).parent().parent().parent().find('.total-product-price').text()).toFixed(2);
+            var subTotal = parseFloat($('.sub-total').text()).toFixed(2);
+            var total = parseFloat($('.total').text()).toFixed(2);
+            $(this).parent().parent().parent().find('.total-product-price').text(parseFloat(totalProductPrice - price).toFixed(2));
+            $('.sub-total').text(parseFloat(subTotal - price).toFixed(2));
+            $('.total').text(parseFloat(total - price).toFixed(2));
         }
-
     });
 
     $('.btn-num-cart-product-up').on('click', function(){
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(numProduct + 1);
-        var price = parseInt($(this).parent().parent().parent().find('.product-price').text());
-        var totalPrice = parseInt($(this).parent().parent().parent().find('.total-product-price').text()) + price
-        $(this).parent().parent().parent().find('.total-product-price').text(totalPrice);
+        var price = parseFloat($(this).parent().parent().parent().find('.product-price').text());
+        var totalProductPrice = parseFloat($(this).parent().parent().parent().find('.total-product-price').text());
+        var subTotal = parseFloat($('.sub-total').text());
+        var total = parseFloat($('.total').text());
+        $(this).parent().parent().parent().find('.total-product-price').text(totalProductPrice + price);
+        $('.sub-total').text(subTotal + price);
+        $('.total').text(parseFloat(total + price));
     });
 
     /*==================================================================
