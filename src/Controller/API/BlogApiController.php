@@ -6,15 +6,16 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Symfony\Component\HttpFoundation\File\File;
-use App\Application\Sonata\MediaBundle\Entity\Media;
 
 use App\Entity\Blog;
+use App\Entity\Tag;
+use Symfony\Component\HttpFoundation\File\File;
+use App\Application\Sonata\MediaBundle\Entity\Media;
 
 class BlogApiController extends FOSRestController
 {
 	/**
-     * @Rest\Get("/api/blogs")
+     * @Rest\Get("/api/blogs", name="api_blog_list")
      */
     public function getBlogsAction(Request $request)
     {
@@ -27,7 +28,7 @@ class BlogApiController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/api/blog/{slug}")
+     * @Rest\Get("/api/blog/{slug}", name="api_blog")
      */
     public function getBlogAction(Request $request)
     {
@@ -40,13 +41,18 @@ class BlogApiController extends FOSRestController
     }
 
     /**
-     * @Rest\Post("/api/blog/add")
+     * @Rest\Post("/api/blog/add", name="api_blog_add")
      */
     public function postBlogAction(Request $request)
     {
         $blog = new Blog();
         $blog->setTitle($request->request->get('title'));
         $blog->setContent($request->request->get('content'));
+
+        if($request->request->get('tag')) {
+        	$tag = $this->getDoctrine()->getManager()->getRepository(Tag::class)->find($request->request->get('tag'));
+        	$blog->addTag($tag);
+        }
 
         $blogFile = new File($request->request->get('filepath'));
         $blog->setMedia($this->createMedia($blogFile, $request->request->get('title') . '.jpg'));
@@ -66,7 +72,7 @@ class BlogApiController extends FOSRestController
     }
 
     /**
-     * @Rest\Put("/api/blog/{slug}")
+     * @Rest\Put("/api/blog/{slug}", name="api_blog_update")
      */
     public function putBlogAction(Request $request)
     {
@@ -92,7 +98,7 @@ class BlogApiController extends FOSRestController
     }
 
    	/**
-     * @Rest\Delete("/api/blog/{slug}")
+     * @Rest\Delete("/api/blog/{slug}", name="api_blog_delete")
      */
     public function deleteBlogAction(Request $request)
     {

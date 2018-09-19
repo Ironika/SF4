@@ -30,11 +30,6 @@ class Collection {
     private $media;
 
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="collection", orphanRemoval=true, cascade={"persist", "remove"})
-     */
-    private $products;
-
-    /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
      */
@@ -73,29 +68,6 @@ class Collection {
 
     public function setMedia($media) {
         $this->media = $media;
-        return $this;
-    }
-
-    public function getProducts() {
-        return $this->products;
-    }
-
-    public function setProducts($products) {
-        $this->products = $products;
-        return $this;
-    }
-
-    public function addProduct(Product $product) {
-        if(!$this->products->contains($product)) {
-            $this->products[] = $product;
-        }
-        return $this;
-    }
-
-    public function removeProduct(Product $product) {
-        if($this->products->contains($product)) {
-            $this->products->removeElement($product);
-        }
         return $this;
     }
 
