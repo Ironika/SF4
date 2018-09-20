@@ -11,6 +11,8 @@ use App\Entity\Blog;
 use App\Entity\Tag;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Application\Sonata\MediaBundle\Entity\Media;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 
 class BlogApiController extends FOSRestController
 {
@@ -45,6 +47,10 @@ class BlogApiController extends FOSRestController
      */
     public function postBlogAction(Request $request)
     {
+    	if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw new AccessDeniedException();
+        }
+        
         $blog = new Blog();
         $blog->setTitle($request->request->get('title'));
         $blog->setContent($request->request->get('content'));
