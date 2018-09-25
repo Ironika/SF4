@@ -30,6 +30,20 @@ class BlogApiController extends FOSRestController
     }
 
     /**
+     * @Rest\Get("/api/blogs/{tag}", name="api_blog_list_tag")
+     */
+    public function getBlogsTagAction(Request $request)
+    {
+    	$tag = $this->getDoctrine()->getManager()->getRepository(Tag::class)->find($request->get('tag'));
+        $blogs = $this->getDoctrine()->getManager()->getRepository(Blog::class)->findByTag($tag);
+        
+        $serializer = $this->get('jms_serializer');
+		$blogsJson = $serializer->serialize($blogs, 'json');
+
+        return new Response($blogsJson);
+    }
+
+    /**
      * @Rest\Get("/api/blog/{slug}", name="api_blog")
      */
     public function getBlogAction(Request $request)
@@ -50,7 +64,7 @@ class BlogApiController extends FOSRestController
     	if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw new AccessDeniedException();
         }
-        
+
         $blog = new Blog();
         $blog->setTitle($request->request->get('title'));
         $blog->setContent($request->request->get('content'));
