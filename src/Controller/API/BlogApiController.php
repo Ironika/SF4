@@ -34,8 +34,8 @@ class BlogApiController extends FOSRestController
      */
     public function getBlogsTagAction(Request $request)
     {
-    	$tag = $this->getDoctrine()->getManager()->getRepository(Tag::class)->find($request->get('tag'));
-        $blogs = $this->getDoctrine()->getManager()->getRepository(Blog::class)->findByTag($tag);
+    	$tag = $this->getDoctrine()->getManager()->getRepository(Tag::class)->findOneBy(array('slug' =>$request->get('tag')));
+        $blogs = $this->getDoctrine()->getManager()->getRepository(Blog::class)->findByTag($tag->getSlug());
         
         $serializer = $this->get('jms_serializer');
 		$blogsJson = $serializer->serialize($blogs, 'json');
