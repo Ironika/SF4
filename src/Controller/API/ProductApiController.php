@@ -18,9 +18,19 @@ class ProductApiController extends FOSRestController
     public function getProductsAction(Request $request)
     {
         $products = $this->getDoctrine()->getManager()->getRepository(Product::class)->findAll();
+        $productsWithMedia = array();
+
+        foreach ($products as $key => $product) {
+        	$medias = $product->getGallery()->getGalleryHasMedias();
+        	foreach ($medias as $key => $value) {
+        		$media = $value->getMedia();
+				$product->addMedia($media);
+        	}
+        	$productsWithMedia[] = $product;
+        }
         
         $serializer = $this->get('jms_serializer');
-		$productsJson = $serializer->serialize($products, 'json');
+		$productsJson = $serializer->serialize($productsWithMedia, 'json');
 
         return new Response($productsJson);
     }

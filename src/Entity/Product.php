@@ -86,6 +86,8 @@ class Product {
      */
     private $createdAt;
 
+    private $medias = array();
+
     public function __construct() {
         $this->sizes = new ArrayCollection();
         $this->shapes = new ArrayCollection();
@@ -241,5 +243,20 @@ class Product {
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    public function getMedias()
+    {
+        return $this->medias;
+    }
+
+    public function setMedias($medias)
+    {
+        $this->medias = $medias;
+    }
+
+    public function addMedia($media) 
+    {
+    	$this->medias[] = $media;
     }
 }
