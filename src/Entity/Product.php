@@ -13,6 +13,7 @@ use App\Entity\Material;
 /**
  * @ORM\Entity
  * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 class Product {
 

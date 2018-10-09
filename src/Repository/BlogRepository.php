@@ -14,4 +14,12 @@ class BlogRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAll()
+    {
+        return $this->getEntityManager()
+            ->createQueryBuilder()->select('b')->from(Blog::class, 'b')->orderBy('b.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

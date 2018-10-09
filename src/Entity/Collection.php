@@ -9,6 +9,7 @@ use App\Entity\Product;
 /**
  * @ORM\Entity
  * @ORM\Table(name="collection")
+ * @ORM\Entity(repositoryClass="App\Repository\CollectionRepository")
  */
 class Collection {
 
@@ -23,6 +24,11 @@ class Collection {
      * @ORM\Column(type="string")
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $catchPhrase;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media")
@@ -59,6 +65,15 @@ class Collection {
 
     public function setName($name) {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getCatchPhrase() {
+        return $this->catchPhrase;
+    }
+
+    public function setCatchPhrase($catchPhrase) {
+        $this->catchPhrase = $catchPhrase;
         return $this;
     }
 
