@@ -31,3 +31,4 @@ doctrine:
                 alias: App
             ApplicationSonataMediaBundle: ~
             SonataMediaBundle: ~
+            FOSOAuthServerBundle: ~

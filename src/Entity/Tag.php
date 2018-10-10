@@ -25,15 +25,9 @@ class Tag {
     private $name;
 
     /**
-     * 
-     * @ORM\ManyToMany(targetEntity="Blog", mappedBy="tags")
+     * @ORM\Column(type="string")
      */
-    private $blogs;
-
-
-    public function __construct() { 
-        $this->blogs = new ArrayCollection();
-    }
+    private $slug;
 
     public function __toString() {
         $string = '';
@@ -53,29 +47,11 @@ class Tag {
 
     public function setName($name) {
         $this->name = $name;
+        $this->slug = strtolower( preg_replace( array( '/[^-a-zA-Z0-9\s]/', '/[\s]/' ), array( '', '-' ), $name ) );
         return $this;
     }
 
-    public function getBlogs() {
-        return $this->blogs;
-    }
-
-    public function setBlogs($blogs) {
-        $this->blogs = $blogs;
-        return $this;
-    }
-
-    public function addBlog(Blog $blog) {
-        if(!$this->blogs->contains($blog)) {
-            $this->blogs[] = $blog;
-        }
-        return $this;
-    }
-
-    public function removeBlog(Blog $blog) {
-        if($this->blogs->contains($blog)) {
-            $this->blogs->removeElement($blog);
-        }
-        return $this;
+    public function getSlug() {
+        return $this->slug;
     }
 }

@@ -9,6 +9,7 @@ use App\Entity\Product;
 /**
  * @ORM\Entity
  * @ORM\Table(name="collection")
+ * @ORM\Entity(repositoryClass="App\Repository\CollectionRepository")
  */
 class Collection {
 
@@ -25,14 +26,14 @@ class Collection {
     private $name;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $catchPhrase;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media")
      */
     private $media;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="collection", orphanRemoval=true, cascade={"persist", "remove"})
-     */
-    private $products;
 
     /**
      * @var \DateTime
@@ -67,35 +68,21 @@ class Collection {
         return $this;
     }
 
+    public function getCatchPhrase() {
+        return $this->catchPhrase;
+    }
+
+    public function setCatchPhrase($catchPhrase) {
+        $this->catchPhrase = $catchPhrase;
+        return $this;
+    }
+
     public function getMedia() {
         return $this->media;
     }
 
     public function setMedia($media) {
         $this->media = $media;
-        return $this;
-    }
-
-    public function getProducts() {
-        return $this->products;
-    }
-
-    public function setProducts($products) {
-        $this->products = $products;
-        return $this;
-    }
-
-    public function addProduct(Product $product) {
-        if(!$this->products->contains($product)) {
-            $this->products[] = $product;
-        }
-        return $this;
-    }
-
-    public function removeProduct(Product $product) {
-        if($this->products->contains($product)) {
-            $this->products->removeElement($product);
-        }
         return $this;
     }
 

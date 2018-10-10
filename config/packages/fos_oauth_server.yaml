@@ -1,0 +1,6 @@
+fos_oauth_server:
+    db_driver: orm       # Drivers available: orm, mongodb, or propel
+    client_class:        App\Entity\API\Client
+    access_token_class:  App\Entity\API\AccessToken
+    refresh_token_class: App\Entity\API\RefreshToken
+    auth_code_class:     App\Entity\API\AuthCode

@@ -181,12 +181,111 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface, Cont
         $gallery5->addGalleryHasMedia($galleryHasMedia15);
 
         $product5->setGallery($gallery5);
+
+        // -------------  PRODUCT 6
+
+        $product6 = new Product();
+        $product6->setName('Luna');
+        $product6->setPrice('39.99');
+        $product6->setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultrices neque at leo dictum blandit. Aenean vel odio sem. Curabitur lectus felis, pulvinar accumsan facilisis in, auctor vel est. Nunc bibendum lacus at lectus vulputate tempus. In gravida, lorem non sodales commodo, tortor velit varius sapien, eget consequat justo metus a massa. Duis et velit accumsan, porttitor elit ut, sollicitudin magna. Mauris varius, orci eget hendrerit dignissim, mauris arcu blandit tortor, at suscipit metus arcu quis dui");
+        $product6->setCategory($this->getReference('category1'));
+        $product6->setCollection($this->getReference('collection2'));
+        $product6->addSize($this->getReference('size1'));
+        $product6->addShape($this->getReference('shape1'));
+        $product6->addMaterial($this->getReference('material3'));
+
+        $gallery6 = $this->createGallery('luna');
+
+        $media16File = new File(__DIR__ . '/../../public/images/product-16.jpg');
+        $media16 = $this->createMedia($media16File, 'product6-1.jpg');
+        $galleryHasMedia16 = $this->createGalleryHasMedia($media16);
+
+        $media17File = new File(__DIR__ . '/../../public/images/product-15.jpg');
+        $media17 = $this->createMedia($media17File, 'product6-2.jpg');
+        $galleryHasMedia17 = $this->createGalleryHasMedia($media17);
+
+        $media18File = new File(__DIR__ . '/../../public/images/product-14.jpg');
+        $media18 = $this->createMedia($media18File, 'product6-3.jpg');
+        $galleryHasMedia18 = $this->createGalleryHasMedia($media18);
+        
+        $gallery6->addGalleryHasMedia($galleryHasMedia16);
+        $gallery6->addGalleryHasMedia($galleryHasMedia17);
+        $gallery6->addGalleryHasMedia($galleryHasMedia18);
+
+        $product6->setGallery($gallery6);
+
+        // -------------  PRODUCT 7
+
+        $product7 = new Product();
+        $product7->setName('Curse');
+        $product7->setPrice('79.99');
+        $product7->setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultrices neque at leo dictum blandit. Aenean vel odio sem. Curabitur lectus felis, pulvinar accumsan facilisis in, auctor vel est. Nunc bibendum lacus at lectus vulputate tempus. In gravida, lorem non sodales commodo, tortor velit varius sapien, eget consequat justo metus a massa. Duis et velit accumsan, porttitor elit ut, sollicitudin magna. Mauris varius, orci eget hendrerit dignissim, mauris arcu blandit tortor, at suscipit metus arcu quis dui");
+        $product7->setCategory($this->getReference('category3'));
+        $product7->setCollection($this->getReference('collection3'));
+        $product7->addSize($this->getReference('size2'));
+        $product7->addShape($this->getReference('shape2'));
+        $product7->addMaterial($this->getReference('material1'));
+
+        $gallery7 = $this->createGallery('curse');
+
+        $media19File = new File(__DIR__ . '/../../public/images/product-13.jpg');
+        $media19 = $this->createMedia($media19File, 'product7-1.jpg');
+        $galleryHasMedia19 = $this->createGalleryHasMedia($media19);
+
+        $media20File = new File(__DIR__ . '/../../public/images/product-12.jpg');
+        $media20 = $this->createMedia($media20File, 'product7-2.jpg');
+        $galleryHasMedia20 = $this->createGalleryHasMedia($media20);
+
+        $media21File = new File(__DIR__ . '/../../public/images/product-11.jpg');
+        $media21 = $this->createMedia($media21File, 'product7-3.jpg');
+        $galleryHasMedia21 = $this->createGalleryHasMedia($media21);
+        
+        $gallery7->addGalleryHasMedia($galleryHasMedia19);
+        $gallery7->addGalleryHasMedia($galleryHasMedia20);
+        $gallery7->addGalleryHasMedia($galleryHasMedia21);
+
+        $product7->setGallery($gallery7);
+
+        // -------------  PRODUCT 8
+
+        $product8 = new Product();
+        $product8->setName('Night');
+        $product8->setPrice('99.99');
+        $product8->setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultrices neque at leo dictum blandit. Aenean vel odio sem. Curabitur lectus felis, pulvinar accumsan facilisis in, auctor vel est. Nunc bibendum lacus at lectus vulputate tempus. In gravida, lorem non sodales commodo, tortor velit varius sapien, eget consequat justo metus a massa. Duis et velit accumsan, porttitor elit ut, sollicitudin magna. Mauris varius, orci eget hendrerit dignissim, mauris arcu blandit tortor, at suscipit metus arcu quis dui");
+        $product8->setCategory($this->getReference('category1'));
+        $product8->setCollection($this->getReference('collection2'));
+        $product8->addSize($this->getReference('size1'));
+        $product8->addShape($this->getReference('shape1'));
+        $product8->addMaterial($this->getReference('material3'));
+
+        $gallery8 = $this->createGallery('night');
+
+        $media22File = new File(__DIR__ . '/../../public/images/product-10.jpg');
+        $media22 = $this->createMedia($media22File, 'product8-1.jpg');
+        $galleryHasMedia22 = $this->createGalleryHasMedia($media22);
+
+        $media23File = new File(__DIR__ . '/../../public/images/product-09.jpg');
+        $media23 = $this->createMedia($media23File, 'product8-2.jpg');
+        $galleryHasMedia23 = $this->createGalleryHasMedia($media23);
+
+        $media24File = new File(__DIR__ . '/../../public/images/product-08.jpg');
+        $media24 = $this->createMedia($media24File, 'product8-3.jpg');
+        $galleryHasMedia24 = $this->createGalleryHasMedia($media24);
+        
+        $gallery8->addGalleryHasMedia($galleryHasMedia22);
+        $gallery8->addGalleryHasMedia($galleryHasMedia23);
+        $gallery8->addGalleryHasMedia($galleryHasMedia24);
+
+        $product8->setGallery($gallery8);
         
         $manager->persist($product1);
         $manager->persist($product2);
         $manager->persist($product3);
         $manager->persist($product4);
         $manager->persist($product5);
+        $manager->persist($product6);
+        $manager->persist($product7);
+        $manager->persist($product8);
 
         $manager->flush();
 
@@ -196,6 +295,9 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface, Cont
         $this->addReference('product3', $product3);
         $this->addReference('product4', $product4);
         $this->addReference('product5', $product5);
+        $this->addReference('product6', $product6);
+        $this->addReference('product7', $product7);
+        $this->addReference('product8', $product8);
     }
 
     public function createMedia($file, $filename)

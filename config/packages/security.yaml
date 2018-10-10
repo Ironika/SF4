@@ -12,6 +12,21 @@ security:
             id: fos_user.user_provider.username
 
     firewalls:
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
+
+        oauth_authorize:
+            pattern:    ^/oauth/v2/auth
+            anonymous: true
+            # Add your favorite authentication process here
+
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  false # note that anonymous access is now enabled
+            
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -20,7 +35,6 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-
             logout:       true
             anonymous:    true
 
@@ -31,4 +45,3 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        # - { path: ^/cart, role: ROLE_USER }

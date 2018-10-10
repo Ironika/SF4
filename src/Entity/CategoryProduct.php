@@ -29,17 +29,6 @@ class CategoryProduct {
      */
     private $media;
 
-    // connexion one to many entre category et product
-    /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="category", orphanRemoval=true, cascade={"persist", "remove"})
-     */
-    private $products;
-
-
-    public function __construct() { // dès qu'on créé une catégorie, un tableau se créé
-        $this->products = new ArrayCollection(); // tableau special de doctrine, collection, pas vraiment tableau
-    }
-
     public function __toString() {
         $string = '';
         if($this->name)
@@ -67,29 +56,6 @@ class CategoryProduct {
 
     public function setMedia($media) {
         $this->media = $media;
-        return $this;
-    }
-
-    public function getProducts() {
-        return $this->products;
-    }
-
-    public function setProducts($products) {
-        $this->products = $products;
-        return $this;
-    }
-
-    public function addProduct(Product $product) { // on type $product, comme ça renvoie erreur si ce n'est pas un product (class)
-        if(!$this->products->contains($product)) {
-            $this->products[] = $product; // quand il y a des crochets puis un =, cela veut dire qu on ajoute
-        }
-        return $this;
-    }
-
-    public function removeProduct(Product $product) {
-        if($this->products->contains($product)) {
-            $this->products->removeElement($product);
-        }
         return $this;
     }
 }

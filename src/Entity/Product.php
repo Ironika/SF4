@@ -13,6 +13,7 @@ use App\Entity\Material;
 /**
  * @ORM\Entity
  * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 class Product {
 
@@ -34,13 +35,13 @@ class Product {
     private $slug;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CategoryProduct", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="CategoryProduct")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Collection", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="Collection")
      * @ORM\JoinColumn(nullable=false)
      */
     private $collection;
@@ -51,21 +52,21 @@ class Product {
     private $gallery;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Size", inversedBy="products")
+     * @ORM\ManyToMany(targetEntity="Size")
      * @ORM\JoinColumn(nullable=true)
      * @ORM\JoinTable(name="product_sizes")
      */
     private $sizes;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Material", inversedBy="products")
+     * @ORM\ManyToMany(targetEntity="Material")
      * @ORM\JoinColumn(nullable=true)
      * @ORM\JoinTable(name="product_materials")
      */
     private $materials;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Shape", inversedBy="products")
+     * @ORM\ManyToMany(targetEntity="Shape")
      * @ORM\JoinColumn(nullable=true)
      * @ORM\JoinTable(name="product_shapes")
      */
@@ -85,6 +86,8 @@ class Product {
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
+
+    private $medias = array();
 
     public function __construct() {
         $this->sizes = new ArrayCollection();
@@ -125,7 +128,6 @@ class Product {
 
     public function setCategory(CategoryProduct $category) {
         $this->category = $category;
-        $category->addProduct($this);
         return $this;
     }
 
@@ -158,7 +160,6 @@ class Product {
 
     public function setCollection(Collection $collection) {
         $this->collection = $collection;
-        $collection->addProduct($this);
         return $this;
     }
 
@@ -243,5 +244,20 @@ class Product {
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    public function getMedias()
+    {
+        return $this->medias;
+    }
+
+    public function setMedias($medias)
+    {
+        $this->medias = $medias;
+    }
+
+    public function addMedia($media) 
+    {
+    	$this->medias[] = $media;
     }
 }

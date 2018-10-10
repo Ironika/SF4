@@ -9,6 +9,7 @@ use App\Entity\Tag;
 /**
  * @ORM\Entity
  * @ORM\Table(name="blog")
+ * @ORM\Entity(repositoryClass="App\Repository\BlogRepository")
  */
 class Blog {
 
@@ -45,7 +46,7 @@ class Blog {
     private $createdAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="blogs")
+     * @ORM\ManyToMany(targetEntity="Tag")
      * @ORM\JoinColumn(nullable=true)
      * @ORM\JoinTable(name="blog_tags")
      */
