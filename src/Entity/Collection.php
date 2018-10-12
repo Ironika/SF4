@@ -31,6 +31,11 @@ class Collection {
     private $catchPhrase;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $slug;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media")
      */
     private $media;
@@ -65,7 +70,12 @@ class Collection {
 
     public function setName($name) {
         $this->name = $name;
+        $this->slug = strtolower( preg_replace( array( '/[^-a-zA-Z0-9\s]/', '/[\s]/' ), array( '', '-' ), $name ) );
         return $this;
+    }
+
+    public function getSlug() {
+        return $this->slug;
     }
 
     public function getCatchPhrase() {
