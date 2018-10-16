@@ -23,12 +23,16 @@ class UserFixtures extends Fixture
         // -------- Customer 1
 
         $addressDelivery1 = new AddressDelivery();
+        $addressDelivery1->setFirstName('Jean Claude');
+        $addressDelivery1->setLastName('Vandame');
         $addressDelivery1->setStreet('32 rue des Pommes');
         $addressDelivery1->setCity('Lisses');
         $addressDelivery1->setCountry('France');
         $addressDelivery1->setZipcode('91300');
 
         $addressBilling1 = new AddressBilling();
+        $addressBilling1->setFirstName('Jean Claude');
+        $addressBilling1->setLastName('Vandame');
         $addressBilling1->setStreet('45 rue des Peches');
         $addressBilling1->setCity('Mennecy');
         $addressBilling1->setCountry('France');
@@ -39,8 +43,6 @@ class UserFixtures extends Fixture
         $customer1->setEnabled(true);
         $customer1->setPlainPassword('customer1');
         $customer1->setUsername('customer1');
-        $customer1->setFirstName('Jean Claude');
-        $customer1->setLastName('Vandame');
         $customer1->setAddressDelivery($addressDelivery1);
         $customer1->setAddressBilling($addressBilling1);
         $customer1->setHaveSubscribeNewsletter(true);
@@ -48,12 +50,16 @@ class UserFixtures extends Fixture
         // -------- Customer 2
 
         $addressDelivery2 = new AddressDelivery();
+        $addressDelivery2->setFirstName('Coco');
+        $addressDelivery2->setLastName("L'asticot");
         $addressDelivery2->setStreet('45 rue des Prunnes');
         $addressDelivery2->setCity('Vincennes');
         $addressDelivery2->setCountry('France');
         $addressDelivery2->setZipcode('92300');
 
         $addressBilling2 = new AddressBilling();
+        $addressBilling2->setFirstName('Coco');
+        $addressBilling2->setLastName("L'asticot");
         $addressBilling2->setStreet('23 rue des Abricots');
         $addressBilling2->setCity('Paris');
         $addressBilling2->setCountry('France');
@@ -64,8 +70,6 @@ class UserFixtures extends Fixture
         $customer2->setEnabled(true);
         $customer2->setPlainPassword('customer2');
         $customer2->setUsername('customer2');
-        $customer2->setFirstName('Coco');
-        $customer2->setLastName("L'asticot");
         $customer2->setAddressDelivery($addressDelivery2);
         $customer2->setAddressBilling($addressBilling2);
         $customer2->setHaveSubscribeNewsletter(true);

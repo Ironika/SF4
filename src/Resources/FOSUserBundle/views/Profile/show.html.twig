@@ -16,7 +16,7 @@
 	        {% if user.addressDelivery %}
 	        	<div class="col-12 col-md-6">
 			        <h4>Delivery Address</h4>
-			        <p>{{ user.fullName }}</p>
+			        <p>{{ user.addressDelivery.fullName }}</p>
 			        <p>{{ user.addressDelivery.street }}</p>
 			        <p>{{ user.addressDelivery.streetAdd }}</p>
 			        <p>{{ user.addressDelivery.city }} / {{ user.addressDelivery.zipcode }}</p>
@@ -27,7 +27,7 @@
 	        {% if user.addressBilling %}
 	        	<div class="col-12 col-md-6">
 			        <h4>Billing Address</h4>
-			        <p>{{ user.fullName }}</p>
+			        <p>{{ user.addressBilling.fullName }}</p>
 			        <p>{{ user.addressBilling.street }}</p>
 			        <p>{{ user.addressBilling.streetAdd }}</p>
 			        <p>{{ user.addressBilling.city }} / {{ user.addressBilling.zipcode }}</p>

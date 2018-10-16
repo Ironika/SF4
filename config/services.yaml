@@ -37,6 +37,11 @@ services:
        tags:
            - { name: form.type, alias: app_user_profile }
 
+    # fos_user.security.login_manager:
+    #     class: FOS\UserBundle\Security\LoginManager
+    #     arguments: ['@security.token_storage','@security.user_checker','@security.authentication.session_strategy','@request_stack',~]
+    #     public: true
+
     # SONATA ADMIN
 
     admin.category_product:

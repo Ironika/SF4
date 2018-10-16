@@ -23,16 +23,6 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $firstName;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $lastName;
-
-    /**
      * @ORM\OneToOne(targetEntity="AddressDelivery", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
@@ -65,33 +55,12 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->createdAt = new \Datetime('now');
+        $this->haveSubscribeNewsletter = false;
         // your own logic
     }
 
     public function __toString() {
         return $this->getEmail();
-    }
-
-    public function getFirstName() {
-        return $this->firstName;
-    }
-
-    public function setFirstName($firstname) {
-        $this->firstName = $firstname;
-        return $this;
-    }
-
-    public function getLastName() {
-        return $this->lastName;
-    }
-
-    public function setLastName($lastname) {
-        $this->lastName = $lastname;
-        return $this;
-    }
-
-    public function getFullName() {
-        return $this->firstName . ' ' . $this->lastName;
     }
 
     public function getAddressDelivery() {

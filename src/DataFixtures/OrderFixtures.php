@@ -30,6 +30,7 @@ class OrderFixtures extends Fixture implements DependentFixtureInterface
         $order1->setUser($this->getReference('customer1'));
         $order1->addOrderProduct($orderProduct1);
         $order1->addOrderProduct($orderProduct2);
+        $order1->getTotal();
 
         // -------- ORDER 2
 
@@ -52,6 +53,7 @@ class OrderFixtures extends Fixture implements DependentFixtureInterface
         $order2->setState('DONE');
         $order2->addOrderProduct($orderProduct3);
         $order2->addOrderProduct($orderProduct4);
+        $order2->getTotal();
 
         // -------- ORDER 3
 
@@ -65,6 +67,7 @@ class OrderFixtures extends Fixture implements DependentFixtureInterface
         $order3 = new Order();
         $order3->setUser($this->getReference('customer2'));
         $order3->addOrderProduct($orderProduct5);
+        $order3->getTotal();
 
         $manager->persist($order1);
         $manager->persist($order2);

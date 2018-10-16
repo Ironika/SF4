@@ -11,6 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
 class Address
 {
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $firstName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $lastName;
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $street;
@@ -42,6 +52,28 @@ class Address
 
     public function __toString(){
         return $this->street;
+    }
+
+    public function getFirstName() {
+        return $this->firstName;
+    }
+
+    public function setFirstName($firstname) {
+        $this->firstName = $firstname;
+        return $this;
+    }
+
+    public function getLastName() {
+        return $this->lastName;
+    }
+
+    public function setLastName($lastname) {
+        $this->lastName = $lastname;
+        return $this;
+    }
+
+    public function getFullName() {
+        return $this->firstName . ' ' . $this->lastName;
     }
 
     public function getStreet() {

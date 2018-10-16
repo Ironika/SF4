@@ -34,6 +34,11 @@ class Order
     protected $state;
 
     /**
+     * @ORM\Column(type="float")
+     */
+    protected $total;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="orders")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -123,11 +128,11 @@ class Order
     }
 
     public function getTotal() {
-        $total = 0;
+        $this->total = 0;
         foreach ($this->orderProducts as $orderProduct) {
-            $total += $orderProduct->getProduct()->getPrice() * $orderProduct->getQuantity();
+            $this->total += $orderProduct->getProduct()->getPrice() * $orderProduct->getQuantity();
         }
-        return $total;
+        return $this->total;
     }
 
 }

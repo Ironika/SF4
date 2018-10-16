@@ -27,15 +27,6 @@
 					<div class="bor8 m-b-20 how-pos4-parent">
 						{{ form_widget(form.email, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder' : 'Email'} }) }}
 					</div>
-
-					<div class="bor8 m-b-20 how-pos4-parent">
-						{{ form_widget(form.firstName, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder' : 'Fistname'} }) }}
-					</div>
-
-					<div class="bor8 m-b-20 how-pos4-parent">
-						{{ form_widget(form.lastName, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder' : 'Lastname'} }) }}
-					</div>
-
 						{{ form_label(form.haveSubscribeNewsletter, null, { 'label_attr' : {'style' : 'display:inline-block' }}) }}
 						{{ form_widget(form.haveSubscribeNewsletter, { 'attr' : {'style' : 'margin-left: 10px;display:inline-block;' }}) }}
 			</div>
@@ -43,6 +34,14 @@
 		<div class="flex-w flex-tr">
 			<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
 				<h3 class="mtext-105 cl2 txt-center p-b-30">Delivery Address</h3>
+
+				<div class="bor8 m-b-20 how-pos4-parent">
+						{{ form_widget(form.addressDelivery.firstName, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder' : 'Fistname'} }) }}
+				</div>
+
+				<div class="bor8 m-b-20 how-pos4-parent">
+					{{ form_widget(form.addressDelivery.lastName, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder' : 'Lastname'} }) }}
+				</div>
 
 				<div class="bor8 m-b-20 how-pos4-parent">
 					{{ form_widget(form.addressDelivery.street, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder' : 'Street'} }) }}
@@ -70,6 +69,14 @@
 			</div>
 			<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
 				<h3 class="mtext-105 cl2 txt-center p-b-30">Billing Address</h3>
+
+				<div class="bor8 m-b-20 how-pos4-parent">
+					{{ form_widget(form.addressBilling.firstName, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder' : 'Fistname'} }) }}
+				</div>
+
+				<div class="bor8 m-b-20 how-pos4-parent">
+					{{ form_widget(form.addressBilling.lastName, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder' : 'Lastname'} }) }}
+				</div>
 
 				<div class="bor8 m-b-20 how-pos4-parent">
 					{{ form_widget(form.addressBilling.street, { 'attr': {'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30', 'placeholder' : 'Street'} }) }}
