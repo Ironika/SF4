@@ -63,6 +63,11 @@ class User extends BaseUser
         return $this->getEmail();
     }
 
+    public function setEmail($email) {
+        $this->setUsername($email);
+        $this->email = $email;
+    }
+
     public function getAddressDelivery() {
         return $this->addressDelivery;
     }

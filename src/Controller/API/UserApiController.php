@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
+use App\Entity\AddressDelivery;
+use App\Entity\AddressBilling;
+
 // use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 // use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
@@ -69,7 +72,7 @@ class UserApiController extends FOSRestController
     /**
      * @Rest\Post("/api/register", name="api_register")
      */
-    public function RegisterAction(Request $request)
+    public function registerAction(Request $request)
     {
         $userManager = $this->get('fos_user.user_manager');
 
@@ -94,6 +97,77 @@ class UserApiController extends FOSRestController
         $user->setEnabled(true); 
         $user->setPlainPassword($password);
         $userManager->updateUser($user, true);
+        
+        $serializer = $this->get('jms_serializer');
+        $userJson = $serializer->serialize($user, 'json');
+
+        return new Response($userJson);
+    }
+
+    /**
+     * @Rest\Put("/api/user/update", name="api_user_update")
+     */
+    public function updateAction(Request $request)
+    {
+        $userDatas = $request->get('user');
+
+        $user = $this->getDoctrine()->getManager()->getRepository(User::class)->find($userDatas['id']);
+
+        $user->setEmail($userDatas['email']);
+        $user->setHaveSubscribeNewsletter($userDatas['have_subscribe_newsletter']);
+
+        if($userDatas['address_delivery'] && count($userDatas['address_delivery']) > 0) {
+            if($user->getAddressDelivery()) {
+                $user->getAddressDelivery()->setFirstName($userDatas['address_delivery']['first_name']);
+                $user->getAddressDelivery()->setLastName($userDatas['address_delivery']['last_name']);
+                $user->getAddressDelivery()->setStreet($userDatas['address_delivery']['street']);
+                $user->getAddressDelivery()->setStreetAdd($userDatas['address_delivery']['street_add']);
+                $user->getAddressDelivery()->setCity($userDatas['address_delivery']['city']);
+                $user->getAddressDelivery()->setCountry($userDatas['address_delivery']['country']);
+                $user->getAddressDelivery()->setZipcode($userDatas['address_delivery']['zipcode']);
+                $user->getAddressDelivery()->setState($userDatas['address_delivery']['state']);
+            } else {
+                $addressDelivery = new AddressDelivery();
+                $addressDelivery->setFirstName($userDatas['address_delivery']['first_name']);
+                $addressDelivery->setLastName($userDatas['address_delivery']['last_name']);
+                $addressDelivery->setStreet($userDatas['address_delivery']['street']);
+                $addressDelivery->setStreetAdd($userDatas['address_delivery']['street_add']);
+                $addressDelivery->setCity($userDatas['address_delivery']['city']);
+                $addressDelivery->setCountry($userDatas['address_delivery']['country']);
+                $addressDelivery->setZipcode($userDatas['address_delivery']['zipcode']);
+                $addressDelivery->setState($userDatas['address_delivery']['state']);
+
+                $user->setAddressDelivery($addressDelivery);
+            }
+        }
+
+        if($userDatas['address_billing'] && count($userDatas['address_billing']) > 0) {
+            if($user->getAddressBilling()) {
+                $user->getAddressBilling()->setFirstName($userDatas['address_billing']['first_name']);
+                $user->getAddressBilling()->setLastName($userDatas['address_billing']['last_name']);
+                $user->getAddressBilling()->setStreet($userDatas['address_billing']['street']);
+                $user->getAddressBilling()->setStreetAdd($userDatas['address_billing']['street_add']);
+                $user->getAddressBilling()->setCity($userDatas['address_billing']['city']);
+                $user->getAddressBilling()->setCountry($userDatas['address_billing']['country']);
+                $user->getAddressBilling()->setZipcode($userDatas['address_billing']['zipcode']);
+                $user->getAddressBilling()->setState($userDatas['address_billing']['state']);
+            } else {
+                $addressBilling = new AddressBilling();
+                $addressBilling->setFirstName($userDatas['address_billing']['first_name']);
+                $addressBilling->setLastName($userDatas['address_billing']['last_name']);
+                $addressBilling->setStreet($userDatas['address_billing']['street']);
+                $addressBilling->setStreetAdd($userDatas['address_billing']['street_add']);
+                $addressBilling->setCity($userDatas['address_billing']['city']);
+                $addressBilling->setCountry($userDatas['address_billing']['country']);
+                $addressBilling->setZipcode($userDatas['address_billing']['zipcode']);
+                $addressBilling->setState($userDatas['address_billing']['state']);
+
+                $user->setAddressBilling($addressBilling);
+            }
+        }
+
+        $this->getDoctrine()->getManager()->persist($user);
+        $this->getDoctrine()->getManager()->flush();
         
         $serializer = $this->get('jms_serializer');
         $userJson = $serializer->serialize($user, 'json');

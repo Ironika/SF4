@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Product;
 
 /**
  * @ORM\Entity
@@ -48,7 +47,6 @@ class Collection {
 
 
     public function __construct() { 
-        $this->products = new ArrayCollection();
         $this->createdAt = new \Datetime('now');
     }
 
