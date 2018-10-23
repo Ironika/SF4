@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="material")
+ * @ORM\Table(name="color")
  */
-class Material {
+class Color {
 
     /**
      * @ORM\Id

@@ -11,10 +11,10 @@ class SizeFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $size1 = new Size();
-        $size1->setName('xs');
+        $size1->setName('3cm');
 
         $size2 = new Size();
-        $size2->setName('s');
+        $size2->setName('4cm');
 
         $size3 = new Size();
         $size3->setName('m');

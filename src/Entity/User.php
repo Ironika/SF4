@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Order;
 use App\Entity\AddressDelivery;
 use App\Entity\AddressBilling;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -56,6 +57,7 @@ class User extends BaseUser
         parent::__construct();
         $this->createdAt = new \Datetime('now');
         $this->haveSubscribeNewsletter = false;
+        $this->orders = new ArrayCollection();
         // your own logic
     }
 

@@ -89,6 +89,7 @@ class Order
     }
 
     public function setUser(User $user) {
+        $user->addOrder($this);
         $this->user = $user;
         return $this;
     }
@@ -133,6 +134,11 @@ class Order
             $this->total += $orderProduct->getProduct()->getPrice() * $orderProduct->getQuantity();
         }
         return $this->total;
+    }
+
+    public function setTotal($total) {
+        $this->total = $total;
+        return $this;
     }
 
 }

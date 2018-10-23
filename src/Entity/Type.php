@@ -4,13 +4,14 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Type;
+
+use App\Entity\CategoryProduct;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="category_product")
+ * @ORM\Table(name="type")
  */
-class CategoryProduct {
+class Type {
 
     /**
      * @ORM\Id
@@ -30,11 +31,14 @@ class CategoryProduct {
     private $slug;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Type", inversedBy="categories")
+     * @ORM\OneToMany(targetEntity="CategoryProduct", mappedBy="type", cascade="persist")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $type;
+    protected $categories;
 
+    public function __construct() {
+        $this->categories = new ArrayCollection();
+    }
 
     public function __toString() {
         $string = '';
@@ -62,12 +66,27 @@ class CategoryProduct {
         return $this->slug;
     }
 
-    public function getType() {
-        return $this->type;
+    public function getCategories() {
+        return $this->categories;
     }
 
-    public function setType($type) {
-        $this->type = $type;
+    public function setCategories($categories) {
+        $this->categories = $categories;
+        return $this->categories;
+    }
+
+    public function addCategory($category) { 
+        if(!$this->categories->contains($category)) {
+            $category->setType($this);
+            $this->categories[] = $category;
+        }
+        return $this;
+    }
+
+    public function removeCategory(CategoryProduct $category) {
+        if($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+        }
         return $this;
     }
 }

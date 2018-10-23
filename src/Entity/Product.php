@@ -9,6 +9,7 @@ use App\Entity\Collection;
 use App\Entity\Size;
 use App\Entity\Shape;
 use App\Entity\Material;
+use App\Entity\Color;
 
 /**
  * @ORM\Entity
@@ -66,6 +67,13 @@ class Product {
     private $materials;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Color")
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinTable(name="product_color")
+     */
+    private $colors;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Shape")
      * @ORM\JoinColumn(nullable=true)
      * @ORM\JoinTable(name="product_shapes")
@@ -93,6 +101,7 @@ class Product {
         $this->sizes = new ArrayCollection();
         $this->shapes = new ArrayCollection();
         $this->materials = new ArrayCollection();
+        $this->colors = new ArrayCollection();
         $this->createdAt = new \Datetime('now');
     }
 
@@ -205,6 +214,29 @@ class Product {
     public function removeMaterial(Material $material) {
         if($this->materials->contains($material)) {
             $this->materials->removeElement($material);
+        }
+        return $this;
+    }
+
+    public function getColors() {
+        return $this->colors;
+    }
+
+    public function setColors(ArrayCollection $colors) {
+        $this->colors = $colors;
+        return $this;
+    }
+
+    public function addColor(Color $color) {
+        if(!$this->colors->contains($color)) {
+            $this->colors[] = $color;
+        }
+        return $this;
+    }
+
+    public function removeColor(Color $color) {
+        if($this->colors->contains($color)) {
+            $this->colors->removeElement($color);
         }
         return $this;
     }

@@ -51,6 +51,13 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Category Product, group: "Product" }
         public: true
 
+    admin.type:
+        class: App\Admin\TypeAdmin
+        arguments: [~, App\Entity\Type, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Type, group: "Product" }
+        public: true
+
     admin.collection:
         class: App\Admin\CollectionAdmin
         arguments: [~, App\Entity\Collection, ~]
@@ -77,6 +84,13 @@ services:
         arguments: [~, App\Entity\Material, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Material, group: "Product" }
+        public: true
+
+    admin.color:
+        class: App\Admin\ColorAdmin
+        arguments: [~, App\Entity\Color, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Color, group: "Product" }
         public: true
 
     admin.shape:

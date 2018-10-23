@@ -17,7 +17,7 @@ class ShapeFixtures extends Fixture
         $shape2->setName('Round');
 
         $shape3 = new Shape();
-        $shape3->setName('Cube');
+        $shape3->setName('Drop');
 
 
         $manager->persist($shape1);
