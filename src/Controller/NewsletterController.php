@@ -11,17 +11,6 @@ use App\Entity\User;
 class NewsletterController extends Controller
 {
     /**
-     * @Route("/newsletter", name="newsletter")
-     */
-    public function indexAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('about.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
-    }
-
-    /**
      * @Route("/newsletter/subscribe", name="newsletter_subscribe")
      */
     public function subscribeAction(Request $request) 
@@ -55,8 +44,6 @@ class NewsletterController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('newsletter-subscribe.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render('newsletter-subscribe.html.twig');
     }
 }

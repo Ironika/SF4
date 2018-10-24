@@ -20,7 +20,7 @@ class OrderApiController extends FOSRestController
 {
 
     /**
-     * @Rest\Get("/api/user/{id}/order" , name="api_user_order")
+     * @Rest\Get("/api/user/{id}/orders" , name="api_user_order")
      */
     public function getUserOrdersAction(Request $request)
     {
