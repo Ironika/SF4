@@ -10,6 +10,7 @@ use App\Entity\Size;
 use App\Entity\Shape;
 use App\Entity\Material;
 use App\Entity\Color;
+use App\Entity\State;
 
 /**
  * @ORM\Entity
@@ -46,6 +47,12 @@ class Product {
      * @ORM\JoinColumn(nullable=false)
      */
     private $collection;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="State")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $state;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist", "remove"})
@@ -169,6 +176,15 @@ class Product {
 
     public function setCollection(Collection $collection) {
         $this->collection = $collection;
+        return $this;
+    }
+
+    public function getState() {
+        return $this->state;
+    }
+
+    public function setState(State $state) {
+        $this->state = $state;
         return $this;
     }
 

@@ -30,6 +30,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface, Cont
         $product1->setDescription("La bague \"Eclipse\" est composée d'un corps de bague en laiton plaqué argent, de rayons de soleil en acier et d'un croissant de lune en plexiglass noir mat. Il n'y a pas de tailles car la bague peut être ajusté de manière invisible.");
         $product1->setCategory($this->getReference('category6'));
         $product1->setCollection($this->getReference('collection1'));
+        $product1->setState($this->getReference('state1'));
         $product1->addMaterial($this->getReference('material1'));
         $product1->addMaterial($this->getReference('material2'));
         
@@ -61,6 +62,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface, Cont
         $product2->setDescription("Le collier \"Nebula\" est fabriqué en plexiglass avec un lien en faux suede (faux cuir Vegan). Ce lien est garanti de qualité japonaise. La pierre au centre est une Labradorite de 1cm de diamètre. Il n'y a pas de fermoir sur ce model afin que vous puissiez ajuster le collier à votre convenance. Il peut se porter long comme un sautoir ou court comme un ras-du-cou.");
         $product2->setCategory($this->getReference('category2'));
         $product2->setCollection($this->getReference('collection1'));
+        $product2->setState($this->getReference('state1'));
 
         $gallery2 = $this->createGallery('cresecent nebula');
 
@@ -80,6 +82,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface, Cont
         $product3->setDescription("\"Trinity\" est un collier fabriqué en plexiglass pourvue d'une fine chaîne. Toutes les chaînes sont plaquées ruthénium. Le collier est réglable et se termine par une gourmette \"INELUCTABLE\".");
         $product3->setCategory($this->getReference('category5'));
         $product3->setCollection($this->getReference('collection1'));
+        $product3->setState($this->getReference('state2'));
         $product3->addColor($this->getReference('color1'));
         $product3->addColor($this->getReference('color2'));
 
@@ -106,6 +109,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface, Cont
         $product4->setDescription("Le ras-de-cou \"Moon Phase\" est en plexiglass, ruban en velours noir de qualité japonaise. Toutes les pierres que j'utilise sont NATURELLES. Leurs couleurs et motifs peuvent donc varier d'un model à l'autre. Toutes les chaînes sont plaquées ruthénium. Le collier est réglable et se termine par une gourmette \"INELUCTABLE\".");
         $product4->setCategory($this->getReference('category5'));
         $product4->setCollection($this->getReference('collection1'));
+        $product4->setState($this->getReference('state2'));
         $product4->addMaterial($this->getReference('material1'));
         $product4->addMaterial($this->getReference('material2'));
 
@@ -137,6 +141,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface, Cont
         $product5->setDescription("Les ras-de-cou \"Crescent Moon\" sont disponibles en plusieurs formes et couleurs de pierres. Toutes les pierres que j'utilise sont NATURELLES. Leurs couleurs et motifs peuvent donc varier d'un modèle à l'autre. Toutes les chaînes sont plaquées ruthénium. Le collier est réglable et se termine par une gourmette \"INELUCTABLE\".");
         $product5->setCategory($this->getReference('category5'));
         $product5->setCollection($this->getReference('collection1'));
+        $product5->setState($this->getReference('state2'));
         $product5->addShape($this->getReference('shape1'));
         $product5->addShape($this->getReference('shape2'));
         $product5->addShape($this->getReference('shape3'));
@@ -171,6 +176,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface, Cont
         $product6->setDescription("La broche \"Pulsar\" se décline en trois versions. Toutes les pierres que j'utilise sont NATURELLES. Leurs couleurs et motifs peuvent donc varier d'un modèle à l'autre.");
         $product6->setCategory($this->getReference('category4'));
         $product6->setCollection($this->getReference('collection1'));
+        $product6->setState($this->getReference('state3'));
         $product6->addMaterial($this->getReference('material1'));
         $product6->addMaterial($this->getReference('material2'));
         $product6->addMaterial($this->getReference('material5'));
@@ -415,7 +421,8 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface, Cont
             SizeFixtures::class,
             ShapeFixtures::class,
             MaterialFixtures::class,
-            ColorFixtures::class
+            ColorFixtures::class,
+            StateFixtures::class
         );
     }
 }

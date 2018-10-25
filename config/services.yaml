@@ -65,6 +65,13 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Collection, group: "Product" }
         public: true
 
+    admin.state:
+        class: App\Admin\StateAdmin
+        arguments: [~, App\Entity\State, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: State, group: "Product" }
+        public: true
+
     admin.size:
         class: App\Admin\SizeAdmin
         arguments: [~, App\Entity\Size, ~]

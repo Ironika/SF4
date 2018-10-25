@@ -15,6 +15,7 @@ use App\Entity\Material;
 use App\Entity\Collection;
 use App\Entity\CategoryProduct;
 use App\Entity\Shape;
+use App\Entity\State;
 
 class ProductAdmin extends AbstractAdmin
 {
@@ -24,12 +25,20 @@ class ProductAdmin extends AbstractAdmin
         $formMapper->add('collection', EntityType::class, [
                 'class' => Collection::class
             ]);
+        $formMapper->add('state', EntityType::class, [
+                'class' => State::class
+            ]);
         $formMapper->add('sizes', EntityType::class, [
                 'class' => Size::class,
                 'multiple' => true,
                 'required' => false
             ]);
         $formMapper->add('materials', EntityType::class, [
+                'class' => Material::class,
+                'multiple' => true,
+                'required' => false
+            ]);
+        $formMapper->add('colors', EntityType::class, [
                 'class' => Material::class,
                 'multiple' => true,
                 'required' => false
@@ -62,8 +71,10 @@ class ProductAdmin extends AbstractAdmin
         $listMapper->add('createdAt');
         $listMapper->add('category');
         $listMapper->add('collection');
+        $listMapper->add('state');
         $listMapper->add('sizes');
         $listMapper->add('materials');
+        $listMapper->add('colors');
         $listMapper->add('shapes');
         $listMapper->add('shortDescription');
         $listMapper->add('description');
